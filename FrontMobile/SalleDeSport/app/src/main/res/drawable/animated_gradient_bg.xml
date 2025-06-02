@@ -1,0 +1,35 @@
+
+<!-- animated_gradient_bg.xml -->
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+    <item android:duration="3000">
+        <shape>
+            <gradient
+                android:angle="45"
+                android:startColor="#0A0F18"
+                android:centerColor="#141C2E"
+                android:endColor="#1A237E"
+                android:type="linear" />
+        </shape>
+    </item>
+    <item android:duration="3000">
+        <shape>
+            <gradient
+                android:angle="135"
+                android:startColor="#141C2E"
+                android:centerColor="#1A237E"
+                android:endColor="#0A0F18"
+                android:type="linear" />
+        </shape>
+    </item>
+    <item android:duration="3000">
+        <shape>
+            <gradient
+                android:angle="225"
+                android:startColor="#1A237E"
+                android:centerColor="#0A0F18"
+                android:endColor="#141C2E"
+                android:type="linear" />
+        </shape>
+    </item>
+</animation-list>

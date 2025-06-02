@@ -1,0 +1,13 @@
+<!-- glow_ring.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <gradient
+        android:type="radial"
+        android:gradientRadius="60dp"
+        android:startColor="#332196F3"
+        android:centerColor="#1A2196F3"
+        android:endColor="#00000000" />
+    <stroke
+        android:width="1dp"
+        android:color="#402196F3" />
+</shape>

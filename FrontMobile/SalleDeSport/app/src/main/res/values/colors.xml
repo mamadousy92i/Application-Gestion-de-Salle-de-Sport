@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+
+<!--    <color name="black">#FF000000</color>-->
+    <color name="dark_gray">#FF121212</color>
+    <color name="medium_gray">#FF1A1A1A</color>
+    <color name="light_gray">#FF333333</color>
+<!--    <color name="white">#FFFFFFFF</color>-->
+    <color name="neon_green">#FF00FF66</color>
+    <color name="neon_green_dark">#FF00CC33</color>
+    <color name="neon_green_light">#FF66FFAA</color>
+    <color name="green_300">#86EFAC</color>
+
+    <color name="black_transparent">#80000000</color>
+
+    <!-- Couleurs de fond principales - Dégradé plus profond et sophistiqué -->
+
+    <color name="dark_bg">#0A0F18</color>        <!-- Bleu-noir profond pour un look premium -->
+    <color name="card_bg">#141C2E</color>        <!-- Bleu-noir légèrement plus clair pour les cartes -->
+
+    <!-- Couleur d'accent principale - Bleu vibrant énergique -->
+
+    <color name="accent_green">#3B82F6</color>   <!-- Bleu électrique pour l'énergie et le dynamisme -->
+    <color name="accent_green_20">#333B82F6</color> <!-- Version transparente de l'accent -->
+
+    <!-- Couleurs secondaires -->
+    <color name="secondary_action">#1A2544</color> <!-- Bleu foncé pour actions secondaires -->
+
+    <!-- Couleurs de texte et transparences -->
+    <color name="white">#FFFFFF</color>          <!-- Blanc pur pour texte important -->
+    <color name="white_20">#33FFFFFF</color>     <!-- Blanc transparent à 20% -->
+    <color name="white_15">#26FFFFFF</color>     <!-- Blanc transparent à 15% -->
+    <color name="white_10">#1AFFFFFF</color>     <!-- Blanc transparent à 10% -->
+    <color name="black">#000000</color>          <!-- Noir pur -->
+
+    <!-- Couleurs supplémentaires pour les actions et les graphiques -->
+    <color name="progress_bg">#1D293E</color>    <!-- Fond pour les barres de progression -->
+    <color name="highlight">#7C3AED</color>      <!-- Violet pour les points forts (performances, records) -->
+    <color name="alert">#F43F5E</color>          <!-- Rouge pour alertes/notifications -->
+    <color name="success">#10B981</color>
+
+
+    <color name="white_50">#80FFFFFF</color>
+
+
+
+
+        <color name="accent_blue">#2196F3</color>
+        <color name="accent_blue_20">#332196F3</color>
+        <color name="accent_purple">#9C27B0</color>
+        <color name="accent_orange">#FF9800</color>
+        <color name="accent_orange_20">#33FF9800</color>
+
+        <!-- Error Colors -->
+        <color name="error_red">#F44336</color>
+        <color name="error_red_20">#33F44336</color>
+        <color name="error_red_30">#4DF44336</color>
+
+        <!-- White Variations -->
+
+        <color name="white_08">#14FFFFFF</color>
+        <color name="white_12">#1FFFFFFF</color>
+        <color name="white_18">#2EFFFFFF</color>
+
+
+        <!-- Text Colors -->
+        <color name="text_secondary">#B0BEC5</color>
+
+        <!-- Card Backgrounds -->
+        <color name="card_premium_bg">#1E1E1E</color>
+        <color name="glass_card_bg">#26FFFFFF</color>
+        <color name="glass_nav_bg">#33FFFFFF</color>
+        <color name="glass_border">#40FFFFFF</color>
+
+
+
+</resources>

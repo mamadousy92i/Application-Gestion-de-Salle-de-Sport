@@ -1,0 +1,11 @@
+<!-- particles_pattern.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:type="radial"
+        android:gradientRadius="200dp"
+        android:centerX="0.3"
+        android:centerY="0.2"
+        android:startColor="#1A2196F3"
+        android:centerColor="#0D2196F3"
+        android:endColor="#00000000" />
+</shape>

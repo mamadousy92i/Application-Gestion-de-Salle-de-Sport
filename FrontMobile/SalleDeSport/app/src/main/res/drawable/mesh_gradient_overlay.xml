@@ -1,0 +1,9 @@
+<!-- mesh_gradient_overlay.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:angle="315"
+        android:startColor="#1A3B82F6"
+        android:centerColor="#0F9C27B0"
+        android:endColor="#143B82F6"
+        android:type="linear" />
+</shape>
