@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from .models import SubscriptionPlan, Subscription, Payment
 from apps.accounts.serializers import MemberSerializer
-
+from django.core.exceptions import ObjectDoesNotExist
+from rest_framework import serializers
 
 class SubscriptionPlanSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(required=False)
@@ -28,14 +29,23 @@ class SubscriptionSerializer(serializers.ModelSerializer):
         read_only_fields = ('id', 'created_at', 'updated_at')
 
     def create(self, validated_data):
-        member_id = validated_data.pop('member_id')
-        plan_id = validated_data.pop('plan_id')
-        subscription = Subscription.objects.create(
-            member_id=member_id,
-            plan_id=plan_id,
-            **validated_data
-        )
-        return subscription
+        try:
+            member_id = validated_data.pop('member_id')
+            plan_id = validated_data.pop('plan_id')
+            subscription = Subscription.objects.create(
+                member_id=member_id,
+                plan_id=plan_id,
+                **validated_data
+            )
+            return subscription
+        except ObjectDoesNotExist:
+            raise serializers.ValidationError({
+                'error': 'Member or SubscriptionPlan does not exist.'
+            })
+        except Exception as e:
+            raise serializers.ValidationError({
+                'error': f'An error occurred: {str(e)}'
+            })
 
 
 class PaymentSerializer(serializers.ModelSerializer):

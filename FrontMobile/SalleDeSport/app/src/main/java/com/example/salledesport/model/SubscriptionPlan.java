@@ -23,7 +23,7 @@ public class SubscriptionPlan {
 
     @SerializedName("includes_pool")
     private boolean includesPool;
-    
+
     private String image;
 
     @SerializedName("created_at")
@@ -105,7 +105,7 @@ public class SubscriptionPlan {
     public void setIncludesPool(boolean includesPool) {
         this.includesPool = includesPool;
     }
-    
+
     public String getImage() {
         return image;
     }

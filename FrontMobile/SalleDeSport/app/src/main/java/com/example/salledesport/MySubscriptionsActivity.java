@@ -66,7 +66,7 @@ public class MySubscriptionsActivity extends AppCompatActivity implements Subscr
             fetchSubscriptions();
 
         }
-        
+
 
     }
 
@@ -152,7 +152,7 @@ public class MySubscriptionsActivity extends AppCompatActivity implements Subscr
 
     private void renewSubscription(Subscription subscription) {
         Call<Subscription> call = apiService.renewSubscription(subscription.getId());
-        
+
         call.enqueue(new Callback<Subscription>() {
             @Override
             public void onResponse(Call<Subscription> call, Response<Subscription> response) {
@@ -173,7 +173,7 @@ public class MySubscriptionsActivity extends AppCompatActivity implements Subscr
 
     private void cancelSubscription(Subscription subscription) {
         Call<Map<String, String>> call = apiService.cancelSubscription(subscription.getId());
-        
+
         call.enqueue(new Callback<Map<String, String>>() {
             @Override
             public void onResponse(Call<Map<String, String>> call, Response<Map<String, String>> response) {

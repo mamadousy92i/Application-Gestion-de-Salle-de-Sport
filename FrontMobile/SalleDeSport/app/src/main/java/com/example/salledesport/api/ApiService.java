@@ -18,7 +18,7 @@ public interface ApiService {
 
     // Récupérer les plans d'abonnement
     @GET("api/subscriptions/plans/")
-    Call<List<SubscriptionPlan>> getSubscriptionPlans();
+    Call<PaginatedResponse<SubscriptionPlan>> getSubscriptionPlans();
 
     // Créer un abonnement
     @POST("api/subscriptions/subscriptions/")
@@ -38,7 +38,7 @@ public interface ApiService {
 
     // Récupérer tous les payments
     @GET("api/subscriptions/payments/")
-    Call<List<Payment>> getPayments();
+    Call<PaginatedResponse<Payment>> getPayments();
 
     // Renouveler un abonnement
     @POST("api/subscriptions/subscriptions/{id}/renew/")

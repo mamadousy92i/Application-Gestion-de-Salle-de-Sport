@@ -4,11 +4,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.salledesport.R;
 import com.example.salledesport.model.Subscription;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
+import com.example.salledesport.api.RetrofitClient;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -46,6 +54,42 @@ public class SubscriptionAdapter extends RecyclerView.Adapter<SubscriptionAdapte
         holder.title.setText(sub.getPlan().getName());
         holder.status.setText("Statut : " + getStatusText(sub.getStatus()));
         holder.dates.setText("Du " + sub.getStartDate() + " au " + sub.getEndDate());
+
+        // Charger l'image du plan d'abonnement
+        if (sub.getPlan() != null && sub.getPlan().getImage() != null && !sub.getPlan().getImage().isEmpty()) {
+            String imageUrl;
+
+            // Vérifier si l'URL de l'image contient déjà l'URL de base
+            if (sub.getPlan().getImage().startsWith("http")) {
+                imageUrl = sub.getPlan().getImage();
+            } else {
+                imageUrl = RetrofitClient.getBaseUrl() + sub.getPlan().getImage();
+            }
+
+            Glide.with(holder.itemView.getContext())
+                    .load(imageUrl)
+                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.placeholder)
+                    .listener(new RequestListener<android.graphics.drawable.Drawable>() {
+                        @Override
+                        public boolean onLoadFailed(@Nullable GlideException e, Object model,
+                                                    Target<android.graphics.drawable.Drawable> target, boolean isFirstResource) {
+                            android.util.Log.e("GLIDE", "Erreur de chargement dans SubscriptionAdapter", e);
+                            return false;
+                        }
+
+                        @Override
+                        public boolean onResourceReady(android.graphics.drawable.Drawable resource, Object model,
+                                                       Target<android.graphics.drawable.Drawable> target, DataSource dataSource,
+                                                       boolean isFirstResource) {
+                            android.util.Log.d("GLIDE", "Image chargée avec succès dans SubscriptionAdapter");
+                            return false;
+                        }
+                    })
+                    .into(holder.subscriptionImage);
+        } else {
+            holder.subscriptionImage.setImageResource(R.drawable.placeholder);
+        }
 
         // Vérifier si l'abonnement est expiré
         boolean isExpired = isSubscriptionExpired(sub.getEndDate());
@@ -116,6 +160,7 @@ public class SubscriptionAdapter extends RecyclerView.Adapter<SubscriptionAdapte
     static class SubscriptionViewHolder extends RecyclerView.ViewHolder {
         TextView title, status, dates;
         Button btnRenew, btnCancel;
+        ImageView subscriptionImage;
 
         public SubscriptionViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -124,6 +169,7 @@ public class SubscriptionAdapter extends RecyclerView.Adapter<SubscriptionAdapte
             dates = itemView.findViewById(R.id.subscriptionDates);
             btnRenew = itemView.findViewById(R.id.btnRenew);
             btnCancel = itemView.findViewById(R.id.btnCancel);
+            subscriptionImage = itemView.findViewById(R.id.subscriptionImage);
         }
     }
 }

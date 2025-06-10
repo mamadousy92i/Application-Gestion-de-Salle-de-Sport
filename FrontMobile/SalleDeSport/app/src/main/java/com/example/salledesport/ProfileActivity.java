@@ -128,7 +128,11 @@ public class ProfileActivity extends BaseActivity {
         age.setText(String.format("%s ans", user.getAge()));
         taille.setText(String.format("%s m", user.getTaille()));
         poids.setText(String.format("%s Kg", user.getPoids()));
-        objectif.setText(user.getGoals().get(0).getName());
+        if (user.getGoals() != null && !user.getGoals().isEmpty()) {
+            objectif.setText(user.getGoals().get(0).getName());
+        } else {
+            objectif.setText("Vous n'avez pas d'objectif");
+        }
 
         if (user.getProfile_picture() != null && !user.getProfile_picture().isEmpty()) {
             String image = RetrofitClient.getBaseUrl() + user.getProfile_picture();

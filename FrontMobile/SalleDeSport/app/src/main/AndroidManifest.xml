@@ -61,7 +61,7 @@
 
         </activity>
         <activity
-            android:name=".PlanDetailActivity"
+            android:name=".model.PlanDetailActivity"
             android:exported="true">
 
         </activity>
@@ -75,6 +75,57 @@
             android:exported="true">
 
         </activity>
+
+        <!-- Déclaration de MainActivity (page d'accueil) -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <!-- Cette activité est lancée en premier lors du démarrage de l'app -->
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+
+
+        <!-- Prise de Masse -->
+
+        <activity android:name=".exercise.prisedemasse.ExercicesDeForceActivity" android:exported="true" />
+        <activity android:name=".exercise.prisedemasse.ExercicesMusculairesActivity" android:exported="true" />
+        <activity android:name=".exercise.prisedemasse.nutrition.NutritionActivityPM" android:exported="true" />
+        <activity android:name=".exercise.ExerciseActivityPM" android:exported="true" />
+        <activity android:name=".validation.ValidationActivityPM" android:exported="true" />
+        <activity android:name=".exercise.prisedemasse.nutrition.NutritionDetailsPM" android:exported="true" />
+
+        <!-- Perte de Poids -->
+
+        <activity android:name=".exercise.pertedepoids.ExercicesCardioActivity" android:exported="true" />
+        <activity android:name=".exercise.pertedepoids.ExercicesCircuitActivity" android:exported="true" />
+        <activity android:name=".validation.ValidationActivityPP" android:exported="true" />
+        <activity android:name=".exercise.ExerciseActivityPP" android:exported="true" />
+        <activity android:name=".exercise.pertedepoids.nutrition.NutritionActivityPP" android:exported="true" />
+        <activity android:name=".exercise.pertedepoids.nutrition.NutritionDetailsPP" android:exported="true" />
+
+        <!-- Maintien -->
+
+        <activity android:name=".exercise.maintien.ExercicesEtirementsActivity" android:exported="true" />
+        <activity android:name=".validation.ValidationActivityM" android:exported="true" />
+        <activity android:name=".exercise.ExerciseActivityM" android:exported="true" />
+        <activity android:name=".exercise.maintien.ExercicesYogaActivity" android:exported="true" />
+        <activity android:name=".exercise.maintien.nutrition.NutritionActivityM" android:exported="true" />
+        <activity android:name=".exercise.maintien.nutrition.NutritionDetailsM" android:exported="true" />
+
+        <!-- Fin de programme -->
+        <activity android:name=".ProgramCompleteActivity" android:exported="true" />
+
+
+
+        <!-- Déclaration d'InfoActivity (page des objectifs) -->
+        <activity
+            android:name=".InfoActivity"
+            android:exported="true" />
 
 
     </application>

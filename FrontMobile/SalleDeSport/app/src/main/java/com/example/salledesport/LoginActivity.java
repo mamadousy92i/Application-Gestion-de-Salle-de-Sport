@@ -92,7 +92,7 @@ public class LoginActivity extends BaseActivity {
                                     emailTxt.setText("");
                                     passwordTxt.setText("");
 
-                                    Intent intent = new Intent(LoginActivity.this, MySubscriptionsActivity.class);
+                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                     startActivity(intent);
                                 } else {
                                     connexionBtn.setEnabled(true);

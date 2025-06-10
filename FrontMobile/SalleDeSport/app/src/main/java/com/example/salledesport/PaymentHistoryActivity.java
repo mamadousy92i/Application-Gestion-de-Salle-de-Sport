@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.salledesport.adapters.PaymentAdapter;
 import com.example.salledesport.model.Payment;
+import com.example.salledesport.model.PaginatedResponse;
 import com.example.salledesport.api.ApiService;
 import com.example.salledesport.api.RetrofitClient;
 
@@ -36,21 +37,26 @@ public class PaymentHistoryActivity extends AppCompatActivity {
 
     private void fetchPayments() {
         ApiService apiService = RetrofitClient.getClient(getApplicationContext()).create(ApiService.class);
-        Call<List<Payment>> call = apiService.getPayments();
+        Call<PaginatedResponse<Payment>> call = apiService.getPayments();
 
-        call.enqueue(new Callback<List<Payment>>() {
+        call.enqueue(new Callback<PaginatedResponse<Payment>>() {
             @Override
-            public void onResponse(Call<List<Payment>> call, Response<List<Payment>> response) {
+            public void onResponse(Call<PaginatedResponse<Payment>> call, Response<PaginatedResponse<Payment>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    adapter = new PaymentAdapter(response.body());
-                    recyclerView.setAdapter(adapter);
+                    List<Payment> payments = response.body().getResults();
+                    if (payments != null && !payments.isEmpty()) {
+                        adapter = new PaymentAdapter(payments);
+                        recyclerView.setAdapter(adapter);
+                    } else {
+                        Toast.makeText(PaymentHistoryActivity.this, "Aucun paiement trouvé", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    Toast.makeText(PaymentHistoryActivity.this, "Erreur serveur", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PaymentHistoryActivity.this, "Erreur serveur: " + response.code(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Payment>> call, Throwable t) {
+            public void onFailure(Call<PaginatedResponse<Payment>> call, Throwable t) {
                 Toast.makeText(PaymentHistoryActivity.this, "Erreur réseau : " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });

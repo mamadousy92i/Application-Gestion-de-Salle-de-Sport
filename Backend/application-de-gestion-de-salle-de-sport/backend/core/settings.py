@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     
     # Third party apps
     'rest_framework',
@@ -150,7 +151,7 @@ REST_KNOX = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "https://51d8-102-164-172-112.ngrok-free.app",
+    "https://b053-2001-4278-80-b686-c922-e8e6-d51d-c966.ngrok-free.app",
     "http://127.0.0.1:4200",
     "http://localhost:4200",
     "http://127.0.0.1:8000",
@@ -163,5 +164,5 @@ CORS_ALLOW_CREDENTIALS = True
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    '51d8-102-164-172-112.ngrok-free.app'
+    'b053-2001-4278-80-b686-c922-e8e6-d51d-c966.ngrok-free.app'
 ]

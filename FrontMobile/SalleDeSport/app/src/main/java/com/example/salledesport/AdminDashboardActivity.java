@@ -149,31 +149,31 @@ public class AdminDashboardActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Map<String, Object>> call, Response<Map<String, Object>> response) {
                 progressBar.setVisibility(View.GONE);
-                
+
                 if (response.isSuccessful() && response.body() != null) {
                     Map<String, Object> stats = response.body();
-                    
+
                     // Afficher les statistiques
                     tvTotalRevenue.setText(stats.get("total_revenue") + " €");
                     tvActiveSubscriptions.setText(stats.get("active_subscriptions") + "");
                     tvNewMembers.setText(stats.get("new_members") + "");
-                    
+
                     cardTotalRevenue.setVisibility(View.VISIBLE);
                     cardActiveSubscriptions.setVisibility(View.VISIBLE);
                     cardNewMembers.setVisibility(View.VISIBLE);
                 } else {
-                    Toast.makeText(AdminDashboardActivity.this, 
-                        "Erreur lors du chargement des statistiques: " + response.code(), 
-                        Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdminDashboardActivity.this,
+                            "Erreur lors du chargement des statistiques: " + response.code(),
+                            Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Map<String, Object>> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
-                Toast.makeText(AdminDashboardActivity.this, 
-                    "Échec de la connexion: " + t.getMessage(), 
-                    Toast.LENGTH_LONG).show();
+                Toast.makeText(AdminDashboardActivity.this,
+                        "Échec de la connexion: " + t.getMessage(),
+                        Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -189,24 +189,24 @@ public class AdminDashboardActivity extends AppCompatActivity {
                     updateChart(monthlyRevenue);
                     chartMonthlyRevenue.setVisibility(View.VISIBLE);
                 } else {
-                    Toast.makeText(AdminDashboardActivity.this, 
-                        "Erreur lors du chargement des revenus mensuels: " + response.code(), 
-                        Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdminDashboardActivity.this,
+                            "Erreur lors du chargement des revenus mensuels: " + response.code(),
+                            Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Map<String, Double>> call, Throwable t) {
-                Toast.makeText(AdminDashboardActivity.this, 
-                    "Échec de la connexion: " + t.getMessage(), 
-                    Toast.LENGTH_LONG).show();
+                Toast.makeText(AdminDashboardActivity.this,
+                        "Échec de la connexion: " + t.getMessage(),
+                        Toast.LENGTH_LONG).show();
             }
         });
     }
 
     private void updateChart(Map<String, Double> monthlyRevenue) {
         List<BarEntry> entries = new ArrayList<>();
-        
+
         // Convertir les données pour le graphique
         for (int i = 1; i <= 12; i++) {
             String monthKey = String.format(Locale.getDefault(), "%02d", i);
@@ -216,15 +216,15 @@ public class AdminDashboardActivity extends AppCompatActivity {
             }
             entries.add(new BarEntry(i - 1, value));
         }
-        
+
         // Créer le dataset
         BarDataSet dataSet = new BarDataSet(entries, "Revenus mensuels (€)");
         dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-        
+
         // Créer les données
         BarData data = new BarData(dataSet);
         data.setBarWidth(0.7f);
-        
+
         // Mettre à jour le graphique
         chartMonthlyRevenue.setData(data);
         chartMonthlyRevenue.invalidate();

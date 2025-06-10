@@ -144,4 +144,8 @@
 
     <!-- Fin Section LOGIN -->
 
+
+    <string name="coach_image">Icône du coach</string>
+    <string name="appbar_scrolling_view_behavior">androidx.coordinatorlayout.widget.ScrollingViewBehavior</string>
+
 </resources>

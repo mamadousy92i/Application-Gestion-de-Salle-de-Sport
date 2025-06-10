@@ -10,7 +10,7 @@ public class SubscriptionPlanResponse<T> {
 
         // Getters et Setters
         public List<T> getResults() {
-            return results;
+                return results;
         }
 }
 

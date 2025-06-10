@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.salledesport.adapters.SubscriptionPlanAdapter;
+import com.example.salledesport.model.PlanDetailActivity;
 import com.example.salledesport.model.SubscriptionPlan;
 import com.example.salledesport.api.ApiService;
 import com.example.salledesport.api.RetrofitClient;
@@ -52,22 +53,23 @@ public class Abonnement extends AppCompatActivity implements SubscriptionPlanAda
         tvNoPlans.setVisibility(View.GONE);
 
         ApiService apiService = RetrofitClient.getClient(getApplicationContext()).create(ApiService.class);
-        Call<List<SubscriptionPlan>> call = apiService.getSubscriptionPlans();
+        Call<com.example.salledesport.model.PaginatedResponse<SubscriptionPlan>> call = apiService.getSubscriptionPlans();
 
-        call.enqueue(new Callback<List<SubscriptionPlan>>() {
+        call.enqueue(new Callback<com.example.salledesport.model.PaginatedResponse<SubscriptionPlan>>() {
             @Override
-            public void onResponse(Call<List<SubscriptionPlan>> call, Response<List<SubscriptionPlan>> response) {
+            public void onResponse(Call<com.example.salledesport.model.PaginatedResponse<SubscriptionPlan>> call, Response<com.example.salledesport.model.PaginatedResponse<SubscriptionPlan>> response) {
                 progressBar.setVisibility(View.GONE);
-                
+
                 if (response.isSuccessful() && response.body() != null) {
-                    List<SubscriptionPlan> plans = response.body();
-                    
-                    if (plans.isEmpty()) {
-                        tvNoPlans.setVisibility(View.VISIBLE);
-                    } else {
+                    List<SubscriptionPlan> plans = response.body().getResults();
+
+                    if (plans != null && !plans.isEmpty()) {
                         recyclerView.setVisibility(View.VISIBLE);
                         adapter = new SubscriptionPlanAdapter(plans, Abonnement.this);
                         recyclerView.setAdapter(adapter);
+                    } else {
+                        tvNoPlans.setVisibility(View.VISIBLE);
+                        tvNoPlans.setText("Aucun plan d'abonnement trouvé.");
                     }
                 } else {
                     tvNoPlans.setVisibility(View.VISIBLE);
@@ -76,7 +78,7 @@ public class Abonnement extends AppCompatActivity implements SubscriptionPlanAda
             }
 
             @Override
-            public void onFailure(Call<List<SubscriptionPlan>> call, Throwable t) {
+            public void onFailure(Call<com.example.salledesport.model.PaginatedResponse<SubscriptionPlan>> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
                 tvNoPlans.setVisibility(View.VISIBLE);
                 tvNoPlans.setText("Erreur réseau: " + t.getMessage());

@@ -1,6 +1,5 @@
 package com.example.salledesport;
 
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -13,7 +12,6 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,7 +19,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -36,6 +33,7 @@ import com.bumptech.glide.request.target.Target;
 import com.example.salledesport.api.ProfileService;
 import com.example.salledesport.api.RetrofitClient;
 import com.example.salledesport.model.Goal;
+import com.example.salledesport.model.GoalUpdateRequest;
 import com.example.salledesport.model.UserUpdateRequest;
 import com.example.salledesport.model.Utilisateur;
 import com.example.salledesport.utils.BaseActivity;
@@ -63,8 +61,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import android.Manifest;
 
-
-
 public class EditProfileActivity extends BaseActivity {
     private ShapeableImageView profileImageView;
     private TextInputEditText prenomEditText;
@@ -73,31 +69,18 @@ public class EditProfileActivity extends BaseActivity {
     private TextInputEditText telephoneEditText;
     private TextInputEditText tailleEditText;
     private TextInputEditText poidsEditText;
-
     private TextView changeProfilePicture;
-
     private ChipGroup genderChipGroup;
     private Chip chipMale, chipFemale, chipOther;
     private ChipGroup objectifChipGroup;
     private Chip chipGain, chipPerte, chipMaintien;
-
     private MaterialCardView backButton;
-
     private MaterialButton EnregistrerBtn;
-
     private Button SupprimerCompteBtn;
-
     private ActivityResultLauncher<Intent> imagePickerLauncher;
-
     private Uri selectedImageUri;
-
     private String currentPhotoPath;
-
     private static final int PERMISSIONS_REQUEST_CODE = 100;
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,25 +90,20 @@ public class EditProfileActivity extends BaseActivity {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             setupSystemBarsBehavior();
             return insets;
-
         });
         hideSystemUI();
 
-        //genre sa permet de selectionner l'image
-        // et de stocker pour utiliser sa plutard
         imagePickerLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
                     if (result.getResultCode() == RESULT_OK) {
                         if (result.getData() == null || result.getData().getData() == null) {
-                            // C'est une photo prise avec la caméra
                             if (currentPhotoPath != null) {
                                 File file = new File(currentPhotoPath);
                                 this.selectedImageUri = Uri.fromFile(file);
                                 profileImageView.setImageURI(this.selectedImageUri);
                             }
                         } else {
-                            // C'est une image sélectionnée depuis la galerie
                             this.selectedImageUri = result.getData().getData();
                             profileImageView.setImageURI(this.selectedImageUri);
                         }
@@ -137,48 +115,25 @@ public class EditProfileActivity extends BaseActivity {
         initialized();
         loadInformationsUser();
 
-        EnregistrerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (selectedImageUri != null) {
-                    uploadProfilePicture(selectedImageUri, new Runnable() {
-                        @Override
-                        public void run() {
-                            updateInformationsUser();
-                        }
-                    });
-                } else {
-                    updateInformationsUser();
-                }
+        EnregistrerBtn.setOnClickListener(v -> {
+            if (selectedImageUri != null) {
+                uploadProfilePicture(selectedImageUri, this::updateInformationsUser);
+            } else {
+                updateInformationsUser();
             }
         });
 
-        SupprimerCompteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDeleteConfirmationDialog();
-            }
+        SupprimerCompteBtn.setOnClickListener(v -> showDeleteConfirmationDialog());
+
+        backButton.setOnClickListener(v -> {
+            setResult(RESULT_CANCELED);
+            finish();
         });
 
-
-
-
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setResult(RESULT_CANCELED);
-                finish();
-            }
-        });
-        profileImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateProfilePicture();
-            }
-        });
+        profileImageView.setOnClickListener(v -> updateProfilePicture());
     }
 
-    private void initialized(){
+    private void initialized() {
         prenomEditText = findViewById(R.id.edit_first_name);
         nomEditText = findViewById(R.id.edit_last_name);
         emailEditText = findViewById(R.id.edit_email);
@@ -193,20 +148,16 @@ public class EditProfileActivity extends BaseActivity {
         chipGain = findViewById(R.id.chip_muscle_gain);
         chipPerte = findViewById(R.id.chip_weight_loss);
         chipMaintien = findViewById(R.id.chip_maintenance);
-
+        objectifChipGroup = findViewById(R.id.goal_chip_group);
         EnregistrerBtn = findViewById(R.id.save_button);
         backButton = findViewById(R.id.back_button);
         SupprimerCompteBtn = findViewById(R.id.delete_account_button);
-
         changeProfilePicture = findViewById(R.id.change_photo);
-
     }
 
-    private void loadInformationsUser(){
-
+    private void loadInformationsUser() {
         ProfileService profileService = RetrofitClient.getClient(getApplicationContext()).create(ProfileService.class);
-
-        Call<Utilisateur>call=profileService.getProfile();
+        Call<Utilisateur> call = profileService.getProfile();
 
         call.enqueue(new Callback<Utilisateur>() {
             @Override
@@ -216,12 +167,9 @@ public class EditProfileActivity extends BaseActivity {
                     if (userJson != null) {
                         Utilisateur user = new Gson().fromJson(userJson, Utilisateur.class);
                         displayInformationsUser(user);
-                        if(displayInformationsUser(user)){
-                            Toast.makeText(EditProfileActivity.this,
-                                    "Données profile chargées avec succès",
-                                    Toast.LENGTH_SHORT).show();
-
-                        }
+                        Toast.makeText(EditProfileActivity.this,
+                                "Données profil chargées avec succès",
+                                Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -229,21 +177,107 @@ public class EditProfileActivity extends BaseActivity {
             @Override
             public void onFailure(Call<Utilisateur> call, Throwable t) {
                 Toast.makeText(EditProfileActivity.this,
-                        "Données NON chargées ",
+                        "Données NON chargées",
                         Toast.LENGTH_SHORT).show();
-
             }
         });
-
     }
 
-    private boolean displayInformationsUser(Utilisateur user){
+    private void updateInformationsUser() {
+        String userJson = getSharedPreferences("auth", MODE_PRIVATE).getString("user", null);
+        if (userJson == null) {
+            Toast.makeText(this, "Erreur : utilisateur non trouvé", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        UserUpdateRequest updateRequest = new UserUpdateRequest();
+        updateRequest.setFirst_name(prenomEditText.getText().toString());
+        updateRequest.setLast_name(nomEditText.getText().toString());
+        updateRequest.setPhone_number(telephoneEditText.getText().toString());
+        updateRequest.setEmail(emailEditText.getText().toString());
+
+        try {
+            updateRequest.setTaille(Double.parseDouble(tailleEditText.getText().toString()));
+            updateRequest.setPoids(Double.parseDouble(poidsEditText.getText().toString()));
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Veuillez entrer des valeurs valides pour la taille et le poids", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        int selectedGenderId = genderChipGroup.getCheckedChipId();
+        if (selectedGenderId == R.id.chip_male) {
+            updateRequest.setGender("Homme");
+        } else if (selectedGenderId == R.id.chip_female) {
+            updateRequest.setGender("Femme");
+        } else if (selectedGenderId == R.id.chip_other) {
+            updateRequest.setGender("Autre");
+        } else {
+            Toast.makeText(this, "Veuillez sélectionner un genre", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String newGoal = null;
+        int selectedGoalId = objectifChipGroup.getCheckedChipId();
+        if (selectedGoalId == R.id.chip_muscle_gain) {
+            newGoal = "Prise de masse";
+        } else if (selectedGoalId == R.id.chip_weight_loss) {
+            newGoal = "Perte de poids";
+        } else if (selectedGoalId == R.id.chip_maintenance) {
+            newGoal = "Maintien";
+        } else {
+            Toast.makeText(this, "Veuillez sélectionner un objectif", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ProfileService profileService = RetrofitClient.getClient(getApplicationContext()).create(ProfileService.class);
+        Call<Utilisateur> userCall = profileService.updateProfile(updateRequest);
+        Call<Goal> goalCall = profileService.changeGoal(new GoalUpdateRequest(newGoal));
+
+        userCall.enqueue(new Callback<Utilisateur>() {
+            @Override
+            public void onResponse(Call<Utilisateur> call, Response<Utilisateur> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    SharedPreferences.Editor editor = getSharedPreferences("auth", MODE_PRIVATE).edit();
+                    editor.putString("user", new Gson().toJson(response.body()));
+                    editor.apply();
+
+                    goalCall.enqueue(new Callback<Goal>() {
+                        @Override
+                        public void onResponse(Call<Goal> call, Response<Goal> response) {
+                            if (response.isSuccessful()) {
+                                Toast.makeText(EditProfileActivity.this, "Profil et objectif mis à jour avec succès", Toast.LENGTH_SHORT).show();
+                                setResult(RESULT_OK);
+                                finish();
+                            } else {
+                                Toast.makeText(EditProfileActivity.this, "Erreur lors de la mise à jour de l'objectif", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Goal> call, Throwable t) {
+                            Toast.makeText(EditProfileActivity.this, "Erreur : " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    Toast.makeText(EditProfileActivity.this, "Erreur lors de la mise à jour du profil", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Utilisateur> call, Throwable t) {
+                Toast.makeText(EditProfileActivity.this, "Erreur : " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private boolean displayInformationsUser(Utilisateur user) {
         prenomEditText.setText(user.getFirst_name());
         nomEditText.setText(user.getLast_name());
         emailEditText.setText(user.getEmail());
         telephoneEditText.setText(user.getPhone_number());
         tailleEditText.setText(String.valueOf(user.getTaille()));
         poidsEditText.setText(String.valueOf(user.getPoids()));
+
         if (user.getGender() != null) {
             switch (user.getGender().toLowerCase()) {
                 case "homme":
@@ -257,17 +291,18 @@ public class EditProfileActivity extends BaseActivity {
                     break;
             }
         }
-        if (user.getGoals() != null) {
+
+        if (user.getGoals() != null && !user.getGoals().isEmpty()) {
             for (Goal goal : user.getGoals()) {
                 if (goal != null && goal.getName() != null) {
-                    switch (goal.getName().toLowerCase()) {
-                        case "perte":
+                    switch (goal.getName()) {
+                        case "Perte de poids":
                             chipPerte.setChecked(true);
                             break;
-                        case "gain":
+                        case "Prise de masse":
                             chipGain.setChecked(true);
                             break;
-                        case "maintien":
+                        case "Maintien":
                             chipMaintien.setChecked(true);
                             break;
                     }
@@ -275,8 +310,8 @@ public class EditProfileActivity extends BaseActivity {
             }
         }
 
-        if(user.getProfile_picture()!=null && !user.getProfile_picture().isEmpty()){
-            String image= RetrofitClient.getBaseUrl() + user.getProfile_picture();
+        if (user.getProfile_picture() != null && !user.getProfile_picture().isEmpty()) {
+            String image = RetrofitClient.getBaseUrl() + user.getProfile_picture();
             Glide.with(this)
                     .load(image)
                     .error(R.drawable.ic_edit_profile)
@@ -287,6 +322,7 @@ public class EditProfileActivity extends BaseActivity {
                             Log.e("GLIDE", "Erreur de chargement", e);
                             return false;
                         }
+
                         @Override
                         public boolean onResourceReady(Drawable resource, Object model,
                                                        Target<Drawable> target, DataSource dataSource,
@@ -300,69 +336,6 @@ public class EditProfileActivity extends BaseActivity {
         return true;
     }
 
-    private void updateInformationsUser(){
-        String userJson = getSharedPreferences("auth", MODE_PRIVATE).getString("user", null);
-        if (userJson == null) {
-            Toast.makeText(this, "Erreur : utilisateur non trouvé", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        UserUpdateRequest updateRequest = new UserUpdateRequest();
-        updateRequest.setFirst_name(prenomEditText.getText().toString());
-        updateRequest.setLast_name(nomEditText.getText().toString());
-        updateRequest.setPhone_number(telephoneEditText.getText().toString());
-        updateRequest.setEmail(emailEditText.getText().toString());
-        updateRequest.setTaille(Double.parseDouble(tailleEditText.getText().toString()));
-        updateRequest.setPoids(Double.parseDouble(poidsEditText.getText().toString()));
-        int selectedChipId = genderChipGroup.getCheckedChipId();
-        int selectedChipId2 = objectifChipGroup.getCheckedChipId();
-        if (selectedChipId == R.id.chip_male) {
-            updateRequest.setGender("Homme");
-        } else if (selectedChipId == R.id.chip_female) {
-            updateRequest.setGender("Femme");
-        } else if (selectedChipId == R.id.chip_other) {
-            updateRequest.setGender("Autre");
-        }
-        if (selectedChipId2 == R.id.chip_muscle_gain) {
-            updateRequest.setObjectif("Prise de masse");
-            } else if (selectedChipId2 == R.id.chip_weight_loss) {
-            updateRequest.setObjectif("Perte de poids");
-        } else if (selectedChipId2 == R.id.chip_maintenance) {
-            updateRequest.setObjectif("Maintien ");
-        }
-
-        ProfileService profileService = RetrofitClient.getClient(getApplicationContext()).create(ProfileService.class);
-        Call<Utilisateur>call =profileService.updateProfile(updateRequest);
-
-        call.enqueue(new Callback<Utilisateur>() {
-            @Override
-            public void onResponse(Call<Utilisateur> call, Response<Utilisateur> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    Toast.makeText(EditProfileActivity.this,
-                            "Données profile modifiées avec succès",
-                            Toast.LENGTH_SHORT).show();
-                    SharedPreferences.Editor editor = getSharedPreferences("auth", MODE_PRIVATE).edit();
-                    editor.putString("user", new Gson().toJson(response.body()));
-                    editor.apply();
-                    setResult(RESULT_OK); // Indique que la modification a réussi
-                    finish();
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Utilisateur> call, Throwable t) {
-                Toast.makeText(EditProfileActivity.this,
-                        "Erreur lors de la mise ajour du Profil",
-                        Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-
-
-
-    }
     public void updateProfilePicture() {
         String userJson = getSharedPreferences("auth", MODE_PRIVATE).getString("user", null);
         if (userJson == null) {
@@ -370,10 +343,9 @@ public class EditProfileActivity extends BaseActivity {
             return;
         }
         if (!checkAndRequestPermissions()) {
-            return; // Attend le callback onRequestPermissionsResult
+            return;
         }
 
-        // Créer un dialogue pour choisir entre caméra et galerie
         new AlertDialog.Builder(this)
                 .setTitle("Choisir une option")
                 .setItems(new CharSequence[]{"Prendre une photo", "Choisir depuis la galerie"}, (dialog, which) -> {
@@ -397,42 +369,33 @@ public class EditProfileActivity extends BaseActivity {
     private void dispatchTakePictureIntent() {
         Log.d("CAMERA", "Dispatching take picture intent");
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // S'assurer qu'il y a une activité de caméra pour gérer l'intent
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            // Créer le fichier où la photo sera sauvegardée
             File photoFile = null;
             try {
                 photoFile = createImageFile();
             } catch (IOException ex) {
                 Toast.makeText(this, "Erreur lors de la création du fichier", Toast.LENGTH_SHORT).show();
             }
-            // Continuer seulement si le fichier a été créé avec succès
             if (photoFile != null) {
                 Uri photoURI = FileProvider.getUriForFile(this,
-                        "com.example.salledesport.fileprovider", // Utilisez votre package name + ".fileprovider"
+                        "com.example.salledesport.fileprovider",
                         photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 imagePickerLauncher.launch(takePictureIntent);
             }
         }
     }
+
     private MultipartBody.Part prepareImagePart(Uri imageUri) {
         try {
-            // Lire les données de l'image depuis l'URI
             InputStream inputStream = getContentResolver().openInputStream(imageUri);
             byte[] imageBytes = new byte[inputStream.available()];
             inputStream.read(imageBytes);
             inputStream.close();
 
-            // Définir le type MIME
             MediaType mediaType = MediaType.parse("image/*");
-
-            // Créer le RequestBody avec les bytes de l'image
             RequestBody requestFile = RequestBody.create(mediaType, imageBytes);
-
-            // Retourner la partie MultipartBody.Part
             return MultipartBody.Part.createFormData("profile_picture", "image.jpg", requestFile);
-
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(this, "Erreur lors de la lecture de l'image", Toast.LENGTH_SHORT).show();
@@ -455,7 +418,7 @@ public class EditProfileActivity extends BaseActivity {
                     SharedPreferences.Editor editor = getSharedPreferences("auth", MODE_PRIVATE).edit();
                     editor.putString("user", new Gson().toJson(response.body()));
                     editor.apply();
-                    if (onSuccess != null) onSuccess.run(); //genre si sa se passse bien sa fait l'autre appel pour les autres infos
+                    if (onSuccess != null) onSuccess.run();
                 } else {
                     Toast.makeText(getApplicationContext(), "Erreur lors de la mise à jour de la photo : " + response.code(), Toast.LENGTH_SHORT).show();
                 }
@@ -469,42 +432,31 @@ public class EditProfileActivity extends BaseActivity {
     }
 
     private File createImageFile() throws IOException {
-        // Créer un nom de fichier unique
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
-
-        // Sauvegarder le chemin du fichier pour l'utiliser plus tard
+        File image = File.createTempFile(imageFileName, ".jpg", storageDir);
         currentPhotoPath = image.getAbsolutePath();
         return image;
     }
 
-    private void SupprimerCompte(){
+    private void SupprimerCompte() {
         String userJson = getSharedPreferences("auth", MODE_PRIVATE).getString("user", null);
         if (userJson == null) {
             Toast.makeText(this, "Erreur : utilisateur non trouvé", Toast.LENGTH_SHORT).show();
             return;
         }
         ProfileService profileService = RetrofitClient.getClient(getApplicationContext()).create(ProfileService.class);
-        Call<Utilisateur>call=profileService.deleteProfile();
+        Call<Utilisateur> call = profileService.deleteProfile();
 
         call.enqueue(new Callback<Utilisateur>() {
             @Override
             public void onResponse(Call<Utilisateur> call, Response<Utilisateur> response) {
                 if (response.isSuccessful()) {
-                    // Suppression réussie, on vide la session locale
                     SharedPreferences.Editor editor = getSharedPreferences("auth", MODE_PRIVATE).edit();
                     editor.clear();
                     editor.apply();
-
                     Toast.makeText(EditProfileActivity.this, "Compte supprimé avec succès", Toast.LENGTH_SHORT).show();
-
-                    // Retour à l'écran de login
                     Intent intent = new Intent(EditProfileActivity.this, LoginActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
@@ -514,14 +466,13 @@ public class EditProfileActivity extends BaseActivity {
                 }
             }
 
-
             @Override
             public void onFailure(Call<Utilisateur> call, Throwable t) {
                 Toast.makeText(EditProfileActivity.this, "Erreur : " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
+
     private void showDeleteConfirmationDialog() {
         new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("Confirmation")
@@ -532,42 +483,30 @@ public class EditProfileActivity extends BaseActivity {
                     SupprimerCompte();
                 })
                 .setCancelText("Annuler")
-                .setCancelClickListener(sDialog -> sDialog.dismiss())
+                .setCancelClickListener(SweetAlertDialog::dismiss)
                 .show();
     }
+
     private boolean checkAndRequestPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            // Android 10+ - Seule la permission CAMERA est nécessaire
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                     != PackageManager.PERMISSION_GRANTED) {
-
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.CAMERA},
                         PERMISSIONS_REQUEST_CODE);
                 return false;
             }
         } else {
-            // Avant Android 10 - Besoin des permissions de stockage
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                     != PackageManager.PERMISSION_GRANTED ||
                     ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                             != PackageManager.PERMISSION_GRANTED) {
-
                 ActivityCompat.requestPermissions(this,
-                        new String[]{
-                                Manifest.permission.CAMERA,
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE
-                        },
+                        new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                         PERMISSIONS_REQUEST_CODE);
                 return false;
             }
         }
         return true;
     }
-
-
-
-
-
-
 }

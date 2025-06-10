@@ -79,4 +79,85 @@
 
 
 
+
+
+        <color name="primary_text">#212121</color>
+        <color name="secondary_text">#757575</color>
+
+
+        <!-- Couleurs principales -->
+        <color name="primary_blue">#3B82F6</color>
+        <color name="primary_blue_dark">#1E40AF</color>
+
+        <color name="accent_orange_light">#FB923C</color>
+
+        <color name="accent_green_light">#34D399</color>
+
+        <color name="accent_red">#EF4444</color>
+        <color name="accent_red_light">#F87171</color>
+
+        <color name="success_green">#059669</color>
+        <color name="warning_yellow">#F59E0B</color>
+
+        <!-- Couleurs de fond -->
+        <color name="background_white">#FFFFFF</color>
+        <color name="card_background_secondary">#F1F5F9</color>
+
+        <!-- Couleurs de texte -->
+
+        <color name="text_tertiary">#94A3B8</color>
+        <color name="tip_text_color">#475569</color>
+
+        <!-- Couleurs d'interaction -->
+        <color name="divider_color">#E2E8F0</color>
+        <color name="progress_track">#E2E8F0</color>
+        <color name="ripple_color">#E2E8F0</color>
+
+        <!-- Couleurs de gradient -->
+        <color name="gradient_middle">#764BA2</color>
+
+        <color name="primary_color">#6B73FF</color>
+        <color name="accent_color">#FF6B9D</color>
+        <color name="success_color">#4CAF50</color>
+        <color name="warning_color">#FFA726</color>
+        <color name="background_light">#F8F9FA</color>
+        <color name="card_background">#FFFFFF</color>
+        <color name="text_primary">#2C3E50</color>
+        <!-- Couleurs Android par défaut -->
+
+        <!-- Couleurs de fond principales - Dégradé sophistiqué -->
+        <color name="caard_bg">#141C2E</color>        <!-- Bleu-noir légèrement plus clair pour les cartes -->
+        <color name="lightt_gray">#FF333333</color>
+        <color name="accent_green_dark">#2E7D32</color>  <!-- Version plus foncée pour l'état pressé -->
+        <!-- Couleur d'accent principale - Bleu vibrant énergique -->
+        <color name="acccent_green">#3B82F6</color>   <!-- Bleu électrique pour l'énergie et le dynamisme -->
+
+
+        <!-- Couleurs secondaires -->
+
+        <!-- Transparences blanches -->
+          <!-- Blanc à 8% -->
+
+        <!-- Couleurs d'accent supplémentaires -->
+
+
+        <!-- Couleurs d'état -->
+
+
+        <!-- Backgrounds spéciaux -->
+
+
+        <!-- Couleurs pour les effets (ripple, etc.) -->
+        <color name="button_ripple">#4D7ED321</color> <!-- Ancienne couleur ripple verte -->
+
+        <!-- Couleurs de dégradé -->
+        <color name="gradient_start">#2d2d2d</color>
+        <color name="gradient_center">#1a1a1a</color>
+        <color name="gradient_end">#0d0d0d</color>
+
+        <!-- Couleurs de superposition -->
+        <color name="overlay_light">#20000000</color>
+        <color name="overlay_medium">#40000000</color>
+        <color name="overlay_dark">#80000000</color>
+
 </resources>

@@ -2,6 +2,7 @@ package com.example.salledesport;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -134,9 +135,22 @@ public class PlanDetailActivity extends AppCompatActivity {
         endCalendar.add(Calendar.MONTH, plan.getDurationMonths());
         String endDate = dateFormat.format(endCalendar.getTime());
 
+        // Récupérer l'ID du membre connecté depuis les SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        int memberId = sharedPreferences.getInt("member_id", 0);
+
+        // Vérifier si l'ID du membre est valide
+        if (memberId <= 0) {
+            Toast.makeText(this, "Erreur: Vous devez être connecté pour souscrire à un abonnement", Toast.LENGTH_LONG).show();
+            btnSubscribe.setEnabled(true);
+            btnSubscribe.setText("S'abonner");
+            return;
+        }
+
         // Créer l'objet Subscription
         Subscription subscription = new Subscription();
         subscription.setPlanId(plan.getId());
+        subscription.setMemberId(memberId); // Ajouter l'ID du membre
         subscription.setStartDate(startDate);
         subscription.setEndDate(endDate);
         subscription.setAutoRenewal(switchAutoRenewal.isChecked());
@@ -155,15 +169,15 @@ public class PlanDetailActivity extends AppCompatActivity {
 
                 if (response.isSuccessful() && response.body() != null) {
                     Subscription createdSubscription = response.body();
-                    
+
                     // Passer à l'écran de paiement
                     Intent intent = new Intent(PlanDetailActivity.this, PaymentActivity.class);
                     intent.putExtra("subscription", new Gson().toJson(createdSubscription));
                     paymentLauncher.launch(intent);
                 } else {
-                    Toast.makeText(PlanDetailActivity.this, 
-                        "Erreur lors de la création de l'abonnement: " + response.code(), 
-                        Toast.LENGTH_LONG).show();
+                    Toast.makeText(PlanDetailActivity.this,
+                            "Erreur lors de la création de l'abonnement: " + response.code(),
+                            Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -171,9 +185,9 @@ public class PlanDetailActivity extends AppCompatActivity {
             public void onFailure(Call<Subscription> call, Throwable t) {
                 btnSubscribe.setEnabled(true);
                 btnSubscribe.setText("S'abonner");
-                Toast.makeText(PlanDetailActivity.this, 
-                    "Erreur de connexion: " + t.getMessage(), 
-                    Toast.LENGTH_LONG).show();
+                Toast.makeText(PlanDetailActivity.this,
+                        "Erreur de connexion: " + t.getMessage(),
+                        Toast.LENGTH_LONG).show();
             }
         });
     }
