@@ -45,6 +45,8 @@
         <activity android:name=".ProfileActivity" android:exported="true" />
         <activity android:name=".RegisterActivity" android:exported="true" />
         <activity android:name=".LoginActivity" android:exported="true" />
+        <activity android:name=".AddMeasurementActivity" android:exported="true" />
+        <activity android:name=".MeasurementListActivity" android:exported="true" />
         <activity
             android:name=".PaymentHistoryActivity"
             android:exported="true">

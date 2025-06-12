@@ -242,7 +242,7 @@
                 app:cardElevation="8dp"
                 android:visibility="visible">
 
-                <!-- No Subscription Message (Shown when no active subscription) -->
+                <!-- No Subscription Message -->
                 <TextView
                     android:id="@+id/textNoSubscription"
                     android:layout_width="match_parent"
@@ -254,14 +254,13 @@
                     android:gravity="center"
                     android:visibility="gone" />
 
-                <!-- Subscription Details (Shown when there is an active subscription) -->
+                <!-- Subscription Details -->
                 <LinearLayout
                     android:id="@+id/subscriptionDetailsLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <!-- Subscription Image -->
                     <ImageView
                         android:id="@+id/subscriptionImage"
                         android:layout_width="match_parent"
@@ -269,7 +268,6 @@
                         android:scaleType="centerCrop"
                         android:src="@android:drawable/ic_menu_gallery" />
 
-                    <!-- Subscription Details -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -297,7 +295,6 @@
                             android:alpha="0.8"
                             android:layout_marginBottom="8dp" />
 
-                        <!-- Progress Bar -->
                         <ProgressBar
                             android:id="@+id/subscriptionProgress"
                             style="?android:attr/progressBarStyleHorizontal"
@@ -384,125 +381,10 @@
     </ScrollView>
 
     <!-- Bottom Navigation -->
-    <androidx.cardview.widget.CardView
+    <include
+        layout="@layout/bottom_navigation"
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        app:cardBackgroundColor="#1A1A2E"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="12dp"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp">
-
-            <!-- Home -->
-            <LinearLayout
-                android:id="@+id/navHome"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:clickable="true"
-                android:background="?android:attr/selectableItemBackground">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_home"
-                    app:tint="#FF6B35" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Accueil"
-                    android:textColor="#FF6B35"
-                    android:textSize="11sp"
-                    android:layout_marginTop="4dp" />
-            </LinearLayout>
-
-            <!-- Planning -->
-            <LinearLayout
-                android:id="@+id/navPlanning"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:clickable="true"
-                android:background="?android:attr/selectableItemBackground">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_calendar"
-                    app:tint="#777777" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Planning"
-                    android:textColor="#777777"
-                    android:textSize="11sp"
-                    android:layout_marginTop="4dp" />
-            </LinearLayout>
-
-            <!-- Health -->
-            <LinearLayout
-                android:id="@+id/navHealth"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:clickable="true"
-                android:background="?android:attr/selectableItemBackground">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_health"
-                    app:tint="#777777" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Santé"
-                    android:textColor="#777777"
-                    android:textSize="11sp"
-                    android:layout_marginTop="4dp" />
-            </LinearLayout>
-
-            <!-- Profile -->
-            <LinearLayout
-                android:id="@+id/navProfile"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="center"
-                android:clickable="true"
-                android:background="?android:attr/selectableItemBackground">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_profile"
-                    app:tint="#777777" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Mon compte"
-                    android:textColor="#777777"
-                    android:textSize="11sp"
-                    android:layout_marginTop="4dp" />
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+        android:layout_height="64dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

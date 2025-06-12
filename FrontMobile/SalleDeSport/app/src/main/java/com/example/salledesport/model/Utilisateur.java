@@ -1,5 +1,7 @@
 package com.example.salledesport.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class Utilisateur {
@@ -18,6 +20,8 @@ public class Utilisateur {
     private int age;
     private double poids;
     private double taille;
+
+
     private List<Goal> goals;
 
     public List<Goal> getGoals() {

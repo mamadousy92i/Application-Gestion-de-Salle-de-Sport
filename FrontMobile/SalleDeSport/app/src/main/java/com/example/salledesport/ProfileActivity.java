@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
@@ -32,8 +31,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
-
 public class ProfileActivity extends BaseActivity {
     private ImageView profile;
     private TextView firstName;
@@ -51,6 +48,10 @@ public class ProfileActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        // Configurer la bottom navigation avec l'onglet Profile actif
+        BottomNavigationHandler navHandler = new BottomNavigationHandler(this);
+        navHandler.setupNavigation(BottomNavigationHandler.ActiveTab.PROFILE);
 
         // Configurer la gestion des barres système
         setupSystemBarsBehavior();
@@ -90,7 +91,6 @@ public class ProfileActivity extends BaseActivity {
         objectif = findViewById(R.id.goal);
         editButton = findViewById(R.id.edit_button);
         logoutButton = findViewById(R.id.logout_button);
-
     }
 
     private void loadProfileDetail() {
@@ -169,7 +169,6 @@ public class ProfileActivity extends BaseActivity {
         Toast.makeText(this, "Déconnexion réussie", Toast.LENGTH_SHORT).show();
         finish();
     }
-
 
     private void logoutConfirmationDialog() {
         new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE)

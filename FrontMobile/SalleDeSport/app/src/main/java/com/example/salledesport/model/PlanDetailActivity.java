@@ -2,7 +2,9 @@ package com.example.salledesport.model;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -14,8 +16,11 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.salledesport.LoginActivity;
 import com.example.salledesport.PaymentActivity;
 import com.example.salledesport.R;
+import com.example.salledesport.model.Subscription;
+import com.example.salledesport.model.SubscriptionPlan;
 import com.example.salledesport.api.ApiService;
 import com.example.salledesport.api.RetrofitClient;
 import com.google.gson.Gson;
@@ -63,6 +68,11 @@ public class PlanDetailActivity extends AppCompatActivity {
         btnSubscribe = findViewById(R.id.btnSubscribe);
         tvStartDate = findViewById(R.id.tvStartDate);
         switchAutoRenewal = findViewById(R.id.switchAutoRenewal);
+
+        // Vérifier si l'utilisateur est connecté
+        SharedPreferences sharedPreferences = getSharedPreferences("auth", MODE_PRIVATE);
+        int userId = sharedPreferences.getInt("id", -1);
+        String userJson = sharedPreferences.getString("user", "");
 
         // Initialiser le calendrier
         calendar = Calendar.getInstance();
@@ -121,7 +131,23 @@ public class PlanDetailActivity extends AppCompatActivity {
         });
 
         // Configurer le bouton d'abonnement
-        btnSubscribe.setOnClickListener(v -> createSubscription());
+        btnSubscribe.setOnClickListener(v -> {
+            // Vérifier si l'utilisateur est connecté avant de créer l'abonnement
+            SharedPreferences sharedPreferences = getSharedPreferences("auth", MODE_PRIVATE);
+            int userId = sharedPreferences.getInt("id", -1);
+            String userJson = sharedPreferences.getString("user", "");
+
+            if (userId <= 0 || userJson.isEmpty()) {
+                // L'utilisateur n'est pas connecté, afficher un message et rediriger vers la page de connexion
+                Toast.makeText(this, "Vous devez être connecté pour souscrire à un abonnement", Toast.LENGTH_LONG).show();
+                Intent loginIntent = new Intent(PlanDetailActivity.this, LoginActivity.class);
+                startActivity(loginIntent);
+                return;
+            }
+
+            // L'utilisateur est connecté, procéder à la création de l'abonnement
+            createSubscription();
+        });
     }
 
     private void createSubscription() {
@@ -133,9 +159,22 @@ public class PlanDetailActivity extends AppCompatActivity {
         endCalendar.add(Calendar.MONTH, plan.getDurationMonths());
         String endDate = dateFormat.format(endCalendar.getTime());
 
+        // Récupérer l'ID de l'utilisateur connecté depuis les SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("auth", MODE_PRIVATE);
+        int memberId = sharedPreferences.getInt("member_id", -1);
+
+        // Vérifier si l'ID de l'utilisateur est valide (devrait déjà être vérifié, mais par sécurité)
+        if (memberId <= 0) {
+            Toast.makeText(this, "Erreur: Vous devez être connecté pour souscrire à un abonnement", Toast.LENGTH_LONG).show();
+            btnSubscribe.setEnabled(true);
+            btnSubscribe.setText("S'abonner");
+            return;
+        }
+
         // Créer l'objet Subscription
         Subscription subscription = new Subscription();
         subscription.setPlanId(plan.getId());
+        subscription.setMemberId(memberId); // Utiliser l'ID de l'utilisateur comme ID du membre
         subscription.setStartDate(startDate);
         subscription.setEndDate(endDate);
         subscription.setAutoRenewal(switchAutoRenewal.isChecked());

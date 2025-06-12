@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_bg"
+    android:fillViewport="true"
+    android:id="@+id/main">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Header avec bouton retour et titre -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:layout_marginBottom="32dp">
+
+            <!-- Bouton retour à gauche -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/back_button"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                app:cardBackgroundColor="@color/white_10"
+                app:cardCornerRadius="22dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/white_20"
+                app:strokeWidth="1dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_arrow_back"
+                    android:padding="10dp"
+                    app:tint="@color/white" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Titre centré -->
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Mesures corporelles"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- PARTIE 1: Saisie des mesures -->
+        <LinearLayout
+            android:id="@+id/measurements_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <!-- Section de bienvenue -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginBottom="32dp">
+
+                <!-- Icône de mesures -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    app:cardBackgroundColor="@color/accent_green"
+                    app:cardCornerRadius="40dp"
+                    app:cardElevation="8dp"
+                    android:layout_marginBottom="16dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="20dp"
+                        app:tint="@color/white"/>
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Renseignez vos mesures"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ces informations nous aident à calculer votre IMC et personnaliser vos recommandations"
+                    android:textColor="@color/white_50"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textAlignment="center"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- Indicateur de progression - Étape 1 -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <View
+                        android:layout_width="32dp"
+                        android:layout_height="4dp"
+                        android:background="@color/accent_green"
+                        android:layout_marginEnd="4dp"/>
+
+                    <View
+                        android:layout_width="32dp"
+                        android:layout_height="4dp"
+                        android:background="@color/white_20"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Poids -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Poids (kg)"
+                android:textColorHint="@color/accent_blue"
+                android:padding="8dp"
+                android:layout_marginBottom="16dp"
+                app:boxBackgroundMode="filled"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeWidthFocused="3dp"
+                app:hintTextColor="@color/accent_green"
+                app:boxStrokeColor="@color/accent_green"
+                app:startIconTint="@color/accent_green">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editWeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:backgroundTint="@color/card_bg"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white_50"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Taille -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Taille (cm)"
+                android:textColorHint="@color/accent_blue"
+                android:padding="8dp"
+                android:layout_marginBottom="32dp"
+                app:boxBackgroundMode="filled"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeWidthFocused="3dp"
+                app:hintTextColor="@color/accent_green"
+                app:boxStrokeColor="@color/accent_green"
+                app:startIconTint="@color/accent_green">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editHeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:backgroundTint="@color/card_bg"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white_50"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Bouton Calculer -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCalculate"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Calculer mon IMC"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:fontFamily="@font/poppins_semibold"
+                android:elevation="4dp"
+                app:cornerRadius="16dp"
+                app:backgroundTint="@color/accent_green"
+                app:rippleColor="@color/white_20"
+                app:iconGravity="start"/>
+
+        </LinearLayout>
+
+        <!-- PARTIE 2: Résultats IMC (initialement cachée) -->
+        <LinearLayout
+            android:id="@+id/results_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:alpha="0">
+
+            <!-- Animation de chargement -->
+            <LinearLayout
+                android:id="@+id/loading_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginBottom="32dp"
+                android:visibility="gone">
+
+                <ProgressBar
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:indeterminateTint="@color/accent_green"
+                    android:layout_marginBottom="16dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Calcul en cours..."
+                    android:textColor="@color/white_50"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_medium"/>
+            </LinearLayout>
+
+            <!-- Résultats -->
+            <LinearLayout
+                android:id="@+id/results_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <!-- Section de félicitations -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginBottom="32dp">
+
+                    <!-- Icône de résultat -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        app:cardBackgroundColor="@color/accent_green"
+                        app:cardCornerRadius="40dp"
+                        app:cardElevation="8dp"
+                        android:layout_marginBottom="16dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_check_circle"
+                            android:padding="20dp"
+                            app:tint="@color/white"/>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Profil analysé !"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:layout_marginBottom="8dp"/>
+
+                    <!-- Indicateur de progression - Étape 2 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center">
+
+                        <View
+                            android:layout_width="32dp"
+                            android:layout_height="4dp"
+                            android:background="@color/accent_green"
+                            android:layout_marginEnd="4dp"/>
+
+                        <View
+                            android:layout_width="32dp"
+                            android:layout_height="4dp"
+                            android:background="@color/accent_green"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Card IMC -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/card_bg"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="4dp"
+                    app:strokeColor="@color/accent_green"
+                    app:strokeWidth="2dp"
+                    android:layout_marginBottom="24dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="24dp"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Votre IMC"
+                            android:textColor="@color/white_50"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/poppins_medium"
+                            android:layout_marginBottom="8dp"/>
+
+                        <TextView
+                            android:id="@+id/imc_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="22.5"
+                            android:textColor="@color/accent_green"
+                            android:textSize="36sp"
+                            android:fontFamily="@font/poppins_bold"
+                            android:layout_marginBottom="8dp"/>
+
+                        <TextView
+                            android:id="@+id/imc_category"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Poids normal"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/poppins_semibold"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Suggestion d'objectif -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:text="Objectif recommandé pour vous"
+                    android:textColor="@color/accent_green"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/poppins_semibold"/>
+
+                <!-- Card de suggestion -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/white_50"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/accent_green"
+                    app:strokeWidth="1dp"
+                    android:layout_marginBottom="24dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="20dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:text="⚖️"
+                            android:textSize="24sp"
+                            android:gravity="center"
+                            android:background="@drawable/circle_background_green"
+                            android:layout_marginEnd="16dp"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/suggested_goal_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Maintien du poids"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:layout_marginBottom="4dp"/>
+
+                            <TextView
+                                android:id="@+id/suggested_goal_description"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Votre IMC est dans la zone optimale. Continuez à maintenir vos bonnes habitudes !"
+                                android:textColor="@color/white_50"
+                                android:textSize="12sp"
+                                android:fontFamily="@font/poppins_medium"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Boutons d'action -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Bouton accepter la suggestion -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnAcceptSuggestion"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:text="Adopter cet objectif"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:elevation="4dp"
+                        app:cornerRadius="16dp"
+                        app:backgroundTint="@color/accent_green"
+                        app:rippleColor="@color/white_20"
+                        app:icon="@drawable/ic_check"
+                        app:iconGravity="start"
+                        android:layout_marginBottom="12dp"/>
+
+                    <!-- Bouton choisir autre objectif -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnChooseOther"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:text="Choisir un autre objectif"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white_50"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_medium"
+                        app:cornerRadius="12dp"
+                        app:backgroundTint="@android:color/transparent"
+                        app:strokeColor="@color/white_20"
+                        app:strokeWidth="1dp"
+                        app:rippleColor="@color/white_10"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

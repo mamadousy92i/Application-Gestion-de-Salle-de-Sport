@@ -147,5 +147,7 @@
 
     <string name="coach_image">Icône du coach</string>
     <string name="appbar_scrolling_view_behavior">androidx.coordinatorlayout.widget.ScrollingViewBehavior</string>
+    <string name="mes_abonnements">Mes abonnements</string>
+    <string name="vous_n_avez_aucun_abonnement_actif">Vous n\'avez aucun abonnement actif</string>
 
 </resources>

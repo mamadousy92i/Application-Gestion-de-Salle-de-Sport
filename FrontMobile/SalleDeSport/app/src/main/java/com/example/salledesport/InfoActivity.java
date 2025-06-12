@@ -23,6 +23,10 @@ public class InfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
 
+        // Configurer la bottom navigation avec l'onglet Objectif actif
+        BottomNavigationHandler navHandler = new BottomNavigationHandler(this);
+        navHandler.setupNavigation(BottomNavigationHandler.ActiveTab.OBJECTIF);
+
         // Initialiser les vues
         initViews();
 

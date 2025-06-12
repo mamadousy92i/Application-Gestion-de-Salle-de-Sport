@@ -151,7 +151,7 @@ REST_KNOX = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "https://b053-2001-4278-80-b686-c922-e8e6-d51d-c966.ngrok-free.app",
+    "https://b9dc-102-164-172-22.ngrok-free.app",
     "http://127.0.0.1:4200",
     "http://localhost:4200",
     "http://127.0.0.1:8000",
@@ -164,5 +164,5 @@ CORS_ALLOW_CREDENTIALS = True
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'b053-2001-4278-80-b686-c922-e8e6-d51d-c966.ngrok-free.app'
+    'b9dc-102-164-172-22.ngrok-free.app'
 ]

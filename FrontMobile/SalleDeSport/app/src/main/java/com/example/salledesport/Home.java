@@ -41,7 +41,7 @@ import retrofit2.Response;
 public class Home extends AppCompatActivity {
 
     private CardView cardSubscriptions, cardProgram, currentSubscriptionCard, viewAllSubscriptionsCard;
-    private LinearLayout navHome, navPlanning, navHealth, navProfile, subscriptionDetailsLayout;
+    private LinearLayout subscriptionDetailsLayout;
     private TextView textUserName, textNoSubscription, subscriptionTitle, subscriptionDuration, subscriptionProgressText;
     private ImageView profileImage, subscriptionImage;
     private ProgressBar subscriptionProgress;
@@ -61,6 +61,10 @@ public class Home extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Configurer la bottom navigation avec l'onglet Home actif
+        BottomNavigationHandler navHandler = new BottomNavigationHandler(this);
+        navHandler.setupNavigation(BottomNavigationHandler.ActiveTab.HOME);
 
         // Initialiser les services API
         apiService = RetrofitClient.getClient(getApplicationContext()).create(ApiService.class);
@@ -88,17 +92,9 @@ public class Home extends AppCompatActivity {
         // Cartes d'action
         cardSubscriptions = findViewById(R.id.cardSubscriptions);
         cardProgram = findViewById(R.id.cardProgram);
-
-        // Navigation du bas
-        navHome = findViewById(R.id.navHome);
-        navPlanning = findViewById(R.id.navPlanning);
-        navHealth = findViewById(R.id.navHealth);
-        navProfile = findViewById(R.id.navProfile);
-
         // Informations utilisateur
         textUserName = findViewById(R.id.textUserName);
         profileImage = findViewById(R.id.profileImage);
-
         // Abonnement actuel
         currentSubscriptionCard = findViewById(R.id.currentSubscriptionCard);
         textNoSubscription = findViewById(R.id.textNoSubscription);
@@ -108,7 +104,6 @@ public class Home extends AppCompatActivity {
         subscriptionProgress = findViewById(R.id.subscriptionProgress);
         subscriptionProgressText = findViewById(R.id.subscriptionProgressText);
         subscriptionImage = findViewById(R.id.subscriptionImage);
-
         // Abonnements disponibles
         viewAllSubscriptionsCard = findViewById(R.id.viewAllSubscriptionsCard);
     }
@@ -137,27 +132,6 @@ public class Home extends AppCompatActivity {
         viewAllSubscriptionsCard.setOnClickListener(v -> {
             // Ouvrir la liste des abonnements disponibles
             Intent intent = new Intent(Home.this, Abonnement.class);
-            startActivity(intent);
-        });
-
-        // Listeners pour la navigation du bas
-        navHome.setOnClickListener(v -> {
-            // Déjà sur la page d'accueil
-        });
-
-        navPlanning.setOnClickListener(v -> {
-            // Ouvrir la page de planning
-            Toast.makeText(this, "Fonctionnalité Planning à venir", Toast.LENGTH_SHORT).show();
-        });
-
-        navHealth.setOnClickListener(v -> {
-            // Ouvrir la page de santé/statistiques
-            Toast.makeText(this, "Fonctionnalité Santé à venir", Toast.LENGTH_SHORT).show();
-        });
-
-        navProfile.setOnClickListener(v -> {
-            // Ouvrir la page des abonnements de l'utilisateur
-            Intent intent = new Intent(Home.this, ProfileActivity.class);
             startActivity(intent);
         });
     }

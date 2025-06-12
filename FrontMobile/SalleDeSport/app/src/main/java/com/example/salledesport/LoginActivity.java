@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -79,20 +80,26 @@ public class LoginActivity extends BaseActivity {
                                 if (response.body().isSuccess()) {
                                     Utilisateur utilisateur = response.body().getUser();
                                     int userId = utilisateur.getId();
+                                    int memberId = response.body().getMemberId();
+
                                     Gson gson = new Gson();
                                     String userJson = gson.toJson(utilisateur);
 
-                                    getSharedPreferences("auth", MODE_PRIVATE)
-                                            .edit()
-                                            .putInt("id", userId)
-                                            .putString("user", userJson)
-                                            .apply();
+                                    SharedPreferences.Editor editor = getSharedPreferences("auth", MODE_PRIVATE).edit();
+                                    editor.putInt("id", userId);
+                                    editor.putInt("member_id", memberId);
+                                    editor.putString("user", userJson);
+                                    editor.apply();
+                                    // Lecture immédiate pour vérification
+                                    SharedPreferences prefs = getSharedPreferences("auth", MODE_PRIVATE);
+                                    int storedMemberId = prefs.getInt("member_id", -1);
+                                    Log.d("LoginActivity", "member_id stocké dans SharedPreferences = " + storedMemberId);
 
-                                    Toast.makeText(LoginActivity.this, "Connexion réussie avec succès", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, "Connexion réussie avec succès", Toast.LENGTH_LONG).show();
                                     emailTxt.setText("");
                                     passwordTxt.setText("");
 
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                    Intent intent = new Intent(LoginActivity.this, Home.class);
                                     startActivity(intent);
                                 } else {
                                     connexionBtn.setEnabled(true);

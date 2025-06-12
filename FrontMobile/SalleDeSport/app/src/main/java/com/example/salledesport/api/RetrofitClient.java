@@ -2,8 +2,6 @@ package com.example.salledesport.api;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-
-
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -12,18 +10,16 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-
-    private static final String BASE_URL = "https://b053-2001-4278-80-b686-c922-e8e6-d51d-c966.ngrok-free.app/";
+    private static final String BASE_URL = "https://b9dc-102-164-172-22.ngrok-free.app/";
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient(Context context) {
         if (retrofit == null) {
-
             OkHttpClient client = new OkHttpClient.Builder()
+                    .cookieJar(new CookieHandler()) // Ajout du CookieHandler
                     // Intercepteur pour récupérer le cookie auth_token à la connexion
                     .addInterceptor(chain -> {
                         Response response = chain.proceed(chain.request());
-
                         Headers headers = response.headers();
                         for (String header : headers.values("Set-Cookie")) {
                             if (header.startsWith("auth_token")) {
@@ -33,22 +29,19 @@ public class RetrofitClient {
                                 break;
                             }
                         }
-
                         return response;
                     })
-
-                    // Intercepteur pour ajouter le token dans les requêtes
+                    // Intercepteur pour ajouter le cookie auth_token
                     .addInterceptor(chain -> {
                         SharedPreferences prefs = context.getSharedPreferences("prefs", Context.MODE_PRIVATE);
                         String token = prefs.getString("auth_token", null);
-
                         Request original = chain.request();
                         Request.Builder requestBuilder = original.newBuilder();
-
                         if (token != null) {
+                            requestBuilder.addHeader("Cookie", "auth_token=" + token);
+                            // Conserver l'en-tête Authorization si nécessaire
                             requestBuilder.addHeader("Authorization", "Token " + token);
                         }
-
                         Request request = requestBuilder.build();
                         return chain.proceed(request);
                     })
@@ -61,6 +54,10 @@ public class RetrofitClient {
                     .build();
         }
         return retrofit;
+    }
+
+    public static ProfileService getApiService(Context context) {
+        return getClient(context).create(ProfileService.class);
     }
 
     public static String getBaseUrl() {

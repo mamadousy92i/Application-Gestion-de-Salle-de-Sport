@@ -107,10 +107,8 @@
                             app:iconSize="16dp"
                             app:iconTint="@color/white"
                             app:rippleColor="@color/white_20"
-                            app:backgroundTint="@color/accent_green"
-                        />
-
-
+                            app:backgroundColor="@color/accent_green"
+                            />
 
                         <!-- Bouton Déconnexion -->
                         <com.google.android.material.card.MaterialCardView
@@ -183,7 +181,7 @@
                                 android:src="@drawable/ic_certified"
                                 android:padding="3dp"
                                 android:contentDescription="@string/verified_badge_desc"
-                                 />
+                                />
                         </com.google.android.material.card.MaterialCardView>
                     </FrameLayout>
 
@@ -259,6 +257,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="center"
+                                android:layout_gravity="center_horizontal"
                                 android:orientation="vertical">
 
                                 <com.google.android.material.card.MaterialCardView
@@ -267,7 +266,7 @@
                                     android:layout_marginBottom="8dp"
                                     app:cardBackgroundColor="@color/accent_green"
                                     app:cardCornerRadius="20dp"
-                                    app:cardElevation="4dp">
+                                    >
 
                                     <ImageView
                                         android:layout_width="match_parent"
@@ -276,7 +275,7 @@
                                         android:padding="8dp"
                                         android:contentDescription="@string/age_icon_desc"
                                         app:tint="@color/white"
-                                        tools:ignore="TooDeepLayout" />
+                                         />
                                 </com.google.android.material.card.MaterialCardView>
 
                                 <TextView
@@ -326,7 +325,7 @@
                                         android:src="@drawable/ic_height"
                                         android:padding="8dp"
                                         android:contentDescription="@string/height_icon_desc"
-                                         />
+                                        />
                                 </com.google.android.material.card.MaterialCardView>
 
                                 <TextView
@@ -376,7 +375,7 @@
                                         android:src="@drawable/ic_weight"
                                         android:padding="8dp"
                                         android:contentDescription="@string/weight_icon_desc"
-                                         />
+                                        />
                                 </com.google.android.material.card.MaterialCardView>
 
                                 <TextView
@@ -437,7 +436,7 @@
                             android:padding="0dp"
                             android:src="@drawable/ic_goal"
                             android:contentDescription="@string/goal_icon_desc"
-                             />
+                            />
                     </com.google.android.material.card.MaterialCardView>
 
                     <LinearLayout
@@ -931,153 +930,10 @@
     </ScrollView>
 
     <!-- Bottom Navigation -->
-    <com.google.android.material.card.MaterialCardView
+    <include
+        layout="@layout/bottom_navigation"
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
-        app:cardBackgroundColor="@color/glass_nav_bg"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="8dp"
-        app:strokeColor="@color/glass_border"
-        app:strokeWidth="1dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:paddingStart="6dp"
-            android:paddingEnd="6dp">
-
-            <!-- Home Tab -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:contentDescription="@string/home_icon_desc"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackgroundBorderless">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_home"
-                    app:tint="@color/white"
-                    android:alpha="0.6" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="@string/home_tab"
-                    android:textColor="@color/white"
-                    android:textSize="11sp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:alpha="0.6" />
-            </LinearLayout>
-
-            <!-- Stats Tab -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:contentDescription="@string/stats_nav_icon_desc"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackgroundBorderless">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_stats"
-                    app:tint="@color/white"
-                    android:alpha="0.6" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="@string/stats_tab"
-                    android:textColor="@color/white"
-                    android:textSize="11sp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:alpha="0.6" />
-            </LinearLayout>
-
-            <!-- Add Tab -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:contentDescription="@string/add_icon_desc"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?android:attr/selectableItemBackgroundBorderless">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_add"
-                    app:tint="@color/white"
-                    android:alpha="0.6" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="@string/add_tab"
-                    android:textColor="@color/white"
-                    android:textSize="11sp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:alpha="0.6" />
-            </LinearLayout>
-
-            <!-- Profile Tab (Active) -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_margin="4dp"
-                android:contentDescription="@string/profile_icon_desc"
-                app:cardBackgroundColor="@color/accent_green"
-                app:cardCornerRadius="28dp"
-                app:cardElevation="0dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackgroundBorderless">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_profile"
-                        app:tint="@color/white" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp"
-                        android:text="@string/profile_tab"
-                        android:textColor="@color/white"
-                        android:textSize="11sp"
-                        android:fontFamily="@font/poppins_semibold" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>

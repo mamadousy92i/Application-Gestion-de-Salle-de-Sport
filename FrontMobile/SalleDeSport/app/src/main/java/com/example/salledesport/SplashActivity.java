@@ -50,7 +50,7 @@ private Button getStartedButton;
             appPrefs.edit().putBoolean("first_launch", false).apply();
             int userId = prefs.getInt("id", -1);
             if (userId != -1) {
-                startActivity(new Intent(SplashActivity.this, ProfileActivity.class));
+                startActivity(new Intent(SplashActivity.this, Home.class));
             } else {
                 startActivity(new Intent(SplashActivity.this, LoginActivity.class));
             }

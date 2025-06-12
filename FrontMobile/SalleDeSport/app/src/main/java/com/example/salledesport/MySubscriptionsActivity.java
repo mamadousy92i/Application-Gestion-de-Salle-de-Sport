@@ -42,6 +42,10 @@ public class MySubscriptionsActivity extends AppCompatActivity implements Subscr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_subscriptions);
 
+        // Configurer la bottom navigation avec l'onglet Abonnement actif
+        BottomNavigationHandler navHandler = new BottomNavigationHandler(this);
+        navHandler.setupNavigation(BottomNavigationHandler.ActiveTab.ABONNEMENT);
+
         // Initialiser les vues
         recyclerView = findViewById(R.id.subscriptionsRecycler);
         progressBar = findViewById(R.id.progressBar);
@@ -55,7 +59,7 @@ public class MySubscriptionsActivity extends AppCompatActivity implements Subscr
         if (userJson == null || authToken == null) {
             Toast.makeText(this, "Erreur : utilisateur non connecté", Toast.LENGTH_SHORT).show();
             finish();
-        }else{
+        } else {
             // Initialiser l'API service
             apiService = RetrofitClient.getClient(getApplicationContext()).create(ApiService.class);
 
@@ -64,10 +68,7 @@ public class MySubscriptionsActivity extends AppCompatActivity implements Subscr
 
             // Charger les abonnements
             fetchSubscriptions();
-
         }
-
-
     }
 
     private void fetchSubscriptions() {

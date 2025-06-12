@@ -46,8 +46,16 @@ class UserViewSet(viewsets.ModelViewSet):
         user = serializer.validated_data
         token = AuthToken.objects.create(user)[1]
 
+        # Récupération du membre lié à cet utilisateur
+        try:
+            member = user.member  # suppose que user est lié à un modèle Member (OneToOneField)
+            member_id = member.id
+        except Exception:
+            member_id = None
+
         response = Response({
             "user": UserSerializer(user).data,
+            "member_id": member_id,
             "message": "Connexion réussie"
         })
 
@@ -81,8 +89,10 @@ class UserViewSet(viewsets.ModelViewSet):
                 member = Member.objects.get(user=user)
                 goals = Goal.objects.filter(user=member)
                 data["goals"] = GoalSerializer(goals, many=True).data
+                data["member_id"] = member.id  # Ajoute l'ID du membre ici
             except Member.DoesNotExist:
                 data["goals"] = []
+                data["member_id"] = None
 
             return Response(data)
 
