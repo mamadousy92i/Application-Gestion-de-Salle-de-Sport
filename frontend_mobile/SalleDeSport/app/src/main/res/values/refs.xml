@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="ic_credit_card" />
+    <drawable name="ic_bank_transfer" />
+    <drawable name="ic_paypal" />
+    <drawable name="ic_cash" />
+</resources>

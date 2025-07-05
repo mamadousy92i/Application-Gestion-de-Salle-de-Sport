@@ -1,0 +1,189 @@
+<resources>
+    <string name="app_name">PowerGym</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+    <string name="nav_home">Home</string>
+    <string name="nav_stats">Stats</string>
+    <string name="nav_workout">Workout</string>
+    <string name="nav_profile">Profile</string>
+
+
+    <!-- Section EDIT PROFIL -->
+
+        <!-- Section En-tête -->
+        <string name="edit_button_text">Modifier</string>
+        <string name="first_name">Mamadou</string>
+        <string name="last_name">SY</string>
+        <string name="subscription_text">Premium Elite</string>
+        <string name="age_label">Âge</string>
+        <string name="age_value">21 ans</string>
+        <string name="height_label">Taille</string>
+        <string name="height_value">1,82 m</string>
+        <string name="weight_label">Poids</string>
+        <string name="weight_value">80 kg</string>
+        <string name="back_button_desc">Retour à l\'écran précédent</string>
+        <string name="logout_button_desc">Se déconnecter</string>
+        <string name="profile_image_desc">Photo de profil</string>
+        <string name="verified_badge_desc">Badge vérifié</string>
+        <string name="age_icon_desc">Icône d\'âge</string>
+        <string name="height_icon_desc">Icône de taille</string>
+        <string name="weight_icon_desc">Icône de poids</string>
+
+        <!-- Section Objectif -->
+        <string name="goal_label">Mon Objectif</string>
+        <string name="goal_value">Perte de poids</string>
+        <string name="edit_goal_button_text">Modifier</string>
+        <string name="goal_icon_desc">Icône d\'objectif</string>
+
+        <!-- Section Dernière séance -->
+        <string name="last_session_title">Dernière séance</string>
+        <string name="last_session_type">HIIT Cardio</string>
+        <string name="last_session_date">15 mai</string>
+        <string name="duration_label">Durée</string>
+        <string name="last_session_duration">30 min</string>
+        <string name="calories_label">Calories</string>
+        <string name="last_session_calories">230 kcal</string>
+        <string name="workout_icon_desc">Icône d\'entraînement</string>
+        <string name="calendar_icon_desc">Icône de calendrier</string>
+        <string name="clock_icon_desc">Icône de durée</string>
+        <string name="flame_icon_desc">Icône de calories</string>
+
+        <!-- Section Statistiques hebdomadaires -->
+        <string name="weekly_stats_title">Cette semaine</string>
+        <string name="sessions_label">Séances</string>
+        <string name="sessions_week_value">4</string>
+        <string name="calories_burned_label">Calories</string>
+        <string name="calories_burned_value">950</string>
+        <string name="minutes_label">Minutes</string>
+        <string name="minutes_active_value">180</string>
+        <string name="chart_icon_desc">Icône de graphique</string>
+        <string name="dumbbell_icon_desc">Icône de séances</string>
+        <string name="fire_icon_desc">Icône de calories brûlées</string>
+        <string name="clock_circular_icon_desc">Icône de minutes actives</string>
+
+        <!-- Section Boutons d'action -->
+        <string name="workouts_button_text">Commencer l\'entraînement</string>
+        <string name="diet_button_text">Programme nutritionnel</string>
+        <string name="stats_button_text">Mes statistiques</string>
+        <string name="diet_icon_desc">Icône de programme nutritionnel</string>
+        <string name="stats_icon_desc">Icône de statistiques</string>
+
+        <!-- Section Navigation inférieure -->
+        <string name="home_tab">Accueil</string>
+        <string name="stats_tab">Stats</string>
+        <string name="add_tab">Ajouter</string>
+        <string name="profile_tab">Profil</string>
+        <string name="home_icon_desc">Icône d\'accueil</string>
+        <string name="stats_nav_icon_desc">Icône de statistiques</string>
+        <string name="add_icon_desc">Icône d\'ajout</string>
+        <string name="profile_icon_desc">Icône de profil</string>
+
+    <!-- FIN Section EDIT PROFILE -->
+
+
+    <!-- Section LOGIN -->
+
+    <string name="app_name_power">POWER</string>
+        <string name="app_name_gym">GYM</string>
+        <string name="welcome_title">Bienvenue</string>
+        <string name="welcome_subtitle">Connectez-vous pour continuer votre parcours de fitness</string>
+        <string name="email_or_phone_label">Email ou téléphone</string>
+        <string name="email_or_phone_hint">Entrez votre email ou téléphone</string>
+        <string name="password_label">Mot de passe</string>
+        <string name="password_hint">Entrez votre mot de passe</string>
+        <string name="remember_me">Rester connecté</string>
+        <string name="forgot_password">Mot de passe oublié ?</string>
+        <string name="sign_in_button">Connexion</string>
+        <string name="or_continue_with">ou continuer avec</string>
+        <string name="google_button">Google</string>
+        <string name="apple_button">Apple</string>
+        <string name="meta_button">Meta</string>
+        <string name="new_to_peakfit">Nouveau sur PeakFit ?</string>
+        <string name="create_account">Créer un compte</string>
+
+        <!-- Content Descriptions -->
+        <string name="logo_icon_description">Icône du logo de l\'application Power Gym</string>
+        <string name="email_or_phone_input_description">Champ pour entrer votre email ou numéro de téléphone</string>
+        <string name="password_input_description">Champ pour entrer votre mot de passe</string>
+        <string name="remember_checkbox_description">Case à cocher pour rester connecté</string>
+        <string name="forgot_password_description">Lien pour réinitialiser le mot de passe</string>
+        <string name="sign_in_button_description">Bouton pour se connecter</string>
+        <string name="google_button_description">Bouton pour se connecter avec Google</string>
+        <string name="apple_button_description">Bouton pour se connecter avec Apple</string>
+        <string name="meta_button_description">Bouton pour se connecter avec Meta</string>
+        <string name="create_account_description">Lien pour créer un nouveau compte</string>
+    <string name="changer_la_photo">Changer la photo</string>
+    <string name="power_gym">POWER GYM</string>
+    <string name="transform_your_body">Transform Your Body</string>
+    <string name="informations_personnelles">INFORMATIONS PERSONNELLES</string>
+    <string name="pr_nom">Prénom</string>
+    <string name="nom">Nom</string>
+    <string name="sexe">Sexe</string>
+    <string name="num_ro_de_t_l_phone">Numéro de téléphone</string>
+    <string name="adresse">Adresse</string>
+    <string name="date_de_naissance">Date de naissance</string>
+    <string name="suivant">SUIVANT</string>
+    <string name="informations_de_connexion">INFORMATIONS DE CONNEXION</string>
+    <string name="nom_d_utilisateur">Nom d\'utilisateur</string>
+    <string name="email">Email</string>
+    <string name="mot_de_passe">Mot de passe</string>
+    <string name="confirmer_le_mot_de_passe">Confirmer le mot de passe</string>
+    <string name="retour">RETOUR</string>
+    <string name="s_inscrire">S\'INSCRIRE</string>
+    <string name="d_j_un_compte">Déjà un compte ?</string>
+    <string name="se_connecter">SE CONNECTER</string>
+    <string name="_2025_power_gym_tous_droits_r_serv_s">© 2025 POWER GYM - Tous droits réservés</string>
+
+    <!-- Fin Section LOGIN -->
+
+
+    <string name="coach_image">Icône du coach</string>
+    <string name="appbar_scrolling_view_behavior">androidx.coordinatorlayout.widget.ScrollingViewBehavior</string>
+    <string name="mes_abonnements">Mes abonnements</string>
+    <string name="vous_n_avez_aucun_abonnement_actif">Vous n\'avez aucun abonnement actif</string>
+    <string name="notifications_desc">Notification</string>
+    <string name="user_profile_image_desc">image user desc\n</string>
+    <string name="notifications_button_desc">description bouton notif\n</string>
+    <string name="continuez_vous_d_passer_chaque_jour">Continuez à vous dépasser chaque jour</string>
+    <string name="back_arrow_desc">retour\n</string>
+    <string name="filter_button_desc">filtre\n</string>
+    <string name="filter_icon_desc">filter\n</string>
+    <string name="active_subscription_icon_desc">abonnement actif\n</string>
+    <string name="expired_subscription_icon_desc">abonnement expiré</string>
+    <string name="no_subscription_image_desc">pas de subscription</string>
+    <string name="error_image_desc">error\n</string>
+    <string name="explore_subscriptions_desc">explorer abonnement\n</string>
+    <string name="retry_button_desc">refresh\n</string>
+    <string name="add_subscription_fab_desc">ad description</string>
+    <string name="plan_image_desc">description</string>
+    <string name="share_plan_desc">detail</string>
+    <string name="share_icon_desc">share description</string>
+    <string name="favorite_plan_desc">favorite plan desc\n</string>
+    <string name="favorite_icon_desc">favorite icon</string>
+    <string name="members_icon_desc">member desc</string>
+    <string name="rating_icon_desc">icon rating</string>
+    <string name="duration_icon_desc">"duration "</string>
+    <string name="feature_included_desc">"feature "</string>
+    <string name="feature_not_included_desc">feature</string>
+    <string name="auto_renewal_desc">auto renewal\n</string>
+    <string name="subscribe_button_desc">payment</string>
+    <string name="security_icon_desc">security</string>
+    <string name="info_button_desc">"info "</string>
+    <string name="info_icon_desc">"info "</string>
+    <string name="premium_crown_desc">crown</string>
+    <string name="sort_plans_desc">sort</string>
+    <string name="no_plans_image_desc">empty plan</string>
+    <string name="notify_me_desc">notify</string>
+    <string name="refresh_plans_desc">refresh</string>
+    <string name="success_icon_desc">success\n</string>
+    <string name="close_banner_desc">close\n</string>
+
+</resources>

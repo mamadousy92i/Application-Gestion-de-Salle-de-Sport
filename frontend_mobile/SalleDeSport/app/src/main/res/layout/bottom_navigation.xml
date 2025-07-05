@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomNavigation"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:layout_marginStart="0dp"
+    android:layout_marginEnd="0dp"
+    android:layout_marginBottom="0dp"
+    app:cardBackgroundColor="@color/card_bg"
+    app:cardCornerRadius="0dp"
+    app:cardElevation="20dp"
+    app:strokeColor="@color/white_10"
+    app:strokeWidth="1dp">
+
+    <!-- Glassmorphism Overlay -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/glass_nav_overlay"
+        android:alpha="0.1" />
+
+    <!-- Active Tab Indicator Background -->
+    <View
+        android:id="@+id/activeIndicator"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/active_tab_bg"
+        android:backgroundTint="@color/accent_green"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp">
+
+        <!-- Home Tab -->
+        <FrameLayout
+            android:id="@+id/homeTab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="2dp"
+            android:contentDescription="@string/home_icon_desc"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless">
+
+            <!-- Active State Background -->
+            <View
+                android:id="@+id/homeActiveBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/tab_active_bg"
+                android:backgroundTint="@color/accent_green"
+                android:visibility="visible" />
+
+            <!-- Tab Content -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <!-- Icon Container with Pulse Effect -->
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp">
+
+                    <!-- Pulse Ring for Active State -->
+                    <View
+                        android:id="@+id/homePulseRing"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/pulse_ring_small"
+                        android:backgroundTint="@color/white"
+                        android:alpha="0.3"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/homeIcon"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_home"
+                        app:tint="@color/white" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/homeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_tab"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:letterSpacing="0.05" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <!-- Stats Tab -->
+        <FrameLayout
+            android:id="@+id/statsTab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="2dp"
+            android:contentDescription="@string/stats_nav_icon_desc"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless">
+
+            <!-- Inactive State Background -->
+            <View
+                android:id="@+id/statsInactiveBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/tab_inactive_bg"
+                android:visibility="visible" />
+
+            <!-- Tab Content -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <!-- Icon Container -->
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp">
+
+                    <!-- Notification Dot -->
+                    <View
+                        android:id="@+id/statsNotificationDot"
+                        android:layout_width="6dp"
+                        android:layout_height="6dp"
+                        android:layout_gravity="top|end"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:background="@drawable/notification_dot"
+                        android:backgroundTint="@color/accent_orange"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/statsIcon"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_notifications"
+                        app:tint="@color/text_secondary" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/statsText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Abonnements"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/poppins_medium" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <!-- Add Tab (FAB Style) -->
+        <FrameLayout
+            android:id="@+id/addTab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="2dp"
+            android:contentDescription="@string/add_icon_desc"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless">
+
+            <!-- Special FAB Background -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/addFabBackground"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                app:cardBackgroundColor="@color/accent_green"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="8dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_goal"
+                    app:tint="@color/white" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Normal Tab Content -->
+            <LinearLayout
+                android:id="@+id/addNormalContent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/addIcon"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginBottom="2dp"
+                    android:src="@drawable/ic_goal"
+                    />
+
+                <TextView
+                    android:id="@+id/addText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Objectif"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/poppins_medium" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <!-- Profile Tab -->
+        <FrameLayout
+            android:id="@+id/profileTab"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_margin="2dp"
+            android:contentDescription="@string/profile_icon_desc"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless">
+
+            <!-- Tab Content -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <!-- Profile Image Container -->
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp">
+
+                    <!-- Profile Image Circle -->
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/profileMiniImage"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_edit_profile"
+                        android:scaleType="centerCrop"
+                        app:shapeAppearanceOverlay="@style/CircleImageView"
+                        app:strokeColor="@color/text_secondary"
+                        app:strokeWidth="1dp"
+                        android:visibility="gone" />
+
+                    <!-- Fallback Icon -->
+                    <ImageView
+                        android:id="@+id/profileIcon"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_profile"
+                        app:tint="@color/text_secondary"
+                        android:visibility="visible" />
+
+                    <!-- Online Status Indicator -->
+                    <View
+                        android:id="@+id/profileOnlineIndicator"
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"
+                        android:layout_gravity="bottom|end"
+                        android:background="@drawable/online_indicator"
+                        android:backgroundTint="@color/accent_green"
+                        android:visibility="visible" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/profileText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/profile_tab"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/poppins_medium" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- Floating Action Button Alternative (Optional) -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/centerFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="-16dp"
+        android:src="@drawable/ic_add"
+        app:backgroundTint="@color/accent_green"
+        app:tint="@color/white"
+        app:elevation="12dp"
+        app:fabSize="mini"
+        android:visibility="gone"
+        android:contentDescription="Action rapide" />
+
+</com.google.android.material.card.MaterialCardView>
+

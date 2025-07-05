@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Abonnement"
+    android:background="@color/dark_bg">
+
+    <!-- Background floating elements - RÉDUITS -->
+    <View
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="-90dp"
+        android:layout_marginEnd="-90dp"
+        android:alpha="0.05"
+        android:background="@drawable/floating_circle"
+        android:backgroundTint="@color/accent_green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="-60dp"
+        android:layout_marginBottom="-60dp"
+        android:alpha="0.03"
+        android:background="@drawable/floating_circle"
+        android:backgroundTint="@color/accent_orange"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Header Section - HAUTEUR RÉDUITE -->
+    <LinearLayout
+        android:id="@+id/headerSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingTop="32dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="16dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Top Bar avec bouton retour et menu - TAILLE RÉDUITE -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="20dp">
+
+            <!-- Bouton retour - PLUS PETIT -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/back_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="12dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/back_button_desc"
+                app:cardBackgroundColor="@color/white_10"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/white_20"
+                app:strokeWidth="1dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_arrow_back"
+                    android:padding="10dp"
+                    android:contentDescription="@string/back_arrow_desc"
+                    app:tint="@color/white" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Titre et sous-titre - TEXTES RÉDUITS -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/titleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nos abonnements"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:letterSpacing="0.02"
+                    android:layout_marginBottom="2dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Choisissez l'offre qui vous convient"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/poppins_medium" />
+            </LinearLayout>
+
+            <!-- Bouton aide/info - PLUS PETIT -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/info_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/info_button_desc"
+                app:cardBackgroundColor="@color/white_10"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/white_20"
+                app:strokeWidth="1dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_info"
+                    android:padding="10dp"
+                    android:contentDescription="@string/info_icon_desc"
+                    app:tint="@color/white" />
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+        <!-- Premium Badge Section - COMPACTÉ -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="@color/card_bg"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:strokeColor="@color/accent_green"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:gravity="center_vertical">
+
+                <!-- Crown Icon - PLUS PETIT -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="12dp"
+                    app:cardBackgroundColor="@color/accent_green"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="2dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_crown"
+                        android:padding="10dp"
+                        android:contentDescription="@string/premium_crown_desc" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Offres Premium PowerGym"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:layout_marginBottom="2dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Transformation garantie ou remboursé"
+                        android:textColor="@color/accent_green"
+                        android:textSize="10sp"
+                        android:fontFamily="@font/poppins_medium" />
+                </LinearLayout>
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NOUVEAU"
+                    android:textColor="@color/white"
+                    android:textSize="9sp"
+                    android:fontFamily="@font/poppins_bold"
+                    app:chipBackgroundColor="@color/accent_orange"
+                    app:chipCornerRadius="10dp"
+                    app:chipMinHeight="20dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Filter/Sort Options - COMPACT -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Tous les plans"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_semibold"
+                android:drawablePadding="6dp"
+                app:drawableTint="@color/accent_green" />
+
+            <!-- Sort Button - PLUS PETIT -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/sortButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Trier"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="11sp"
+                android:fontFamily="@font/poppins_medium"
+                app:cornerRadius="14dp"
+                app:backgroundTint="@color/secondary_action"
+                app:icon="@drawable/ic_filter"
+                app:iconGravity="start"
+                app:iconSize="14dp"
+                app:iconTint="@color/white"
+                app:rippleColor="@color/white_20"
+                app:strokeColor="@color/white_20"
+                app:strokeWidth="1dp"
+                android:minWidth="70dp"
+                android:minHeight="32dp"
+                android:contentDescription="@string/sort_plans_desc" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Main Content Area -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/headerSection"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- RecyclerView - PADDING RÉDUIT -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewPlans"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="20dp"
+            android:scrollbars="none"
+            android:overScrollMode="never"
+            tools:listitem="@layout/item_subscription_plan" />
+
+        <!-- Loading State - TAILLE RÉDUITE -->
+        <LinearLayout
+            android:id="@+id/loadingLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginBottom="20dp"
+                app:cardBackgroundColor="@color/card_bg"
+                app:cardCornerRadius="40dp"
+                app:cardElevation="8dp">
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:indeterminateTint="@color/accent_green" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chargement des abonnements..."
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_medium"
+                android:layout_marginBottom="6dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Préparation de vos offres personnalisées"
+                android:textColor="@color/text_secondary"
+                android:textSize="10sp"
+                android:fontFamily="@font/poppins_regular"
+                android:alpha="0.8" />
+        </LinearLayout>
+
+        <!-- Empty State - TAILLE RÉDUITE -->
+        <LinearLayout
+            android:id="@+id/emptyStateLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone"
+            android:padding="24dp">
+
+            <!-- Empty state illustration - PLUS PETIT -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginBottom="24dp"
+                app:cardBackgroundColor="@color/card_bg"
+                app:cardCornerRadius="50dp"
+                app:cardElevation="8dp">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/no_plans_image_desc"
+                    app:tint="@color/text_secondary" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/tvNoPlans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aucun abonnement disponible"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:fontFamily="@font/poppins_semibold"
+                android:textAlignment="center"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nos offres premium arrivent bientôt.\nRestez connecté pour ne rien manquer !"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins_medium"
+                android:textAlignment="center"
+                android:layout_marginBottom="20dp"
+                android:maxWidth="280dp"
+                android:lineSpacingExtra="1dp" />
+
+            <!-- CTA Buttons - PLUS PETITS -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/notifyMeButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="Me notifier"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    app:cornerRadius="18dp"
+                    app:backgroundTint="@color/accent_green"
+                    app:icon="@drawable/ic_notifications"
+                    app:iconGravity="start"
+                    app:iconSize="16dp"
+                    app:iconTint="@color/white"
+                    app:rippleColor="@color/white_20"
+                    android:minWidth="120dp"
+                    android:minHeight="40dp"
+                    android:contentDescription="@string/notify_me_desc" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/refreshButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Actualiser"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/poppins_medium"
+                    app:cornerRadius="18dp"
+                    app:backgroundTint="@color/secondary_action"
+                    app:icon="@drawable/ic_refresh"
+                    app:iconGravity="start"
+                    app:iconSize="16dp"
+                    app:iconTint="@color/white"
+                    app:rippleColor="@color/white_20"
+                    app:strokeColor="@color/white_20"
+                    app:strokeWidth="1dp"
+                    android:minWidth="100dp"
+                    android:minHeight="40dp"
+                    android:contentDescription="@string/refresh_plans_desc" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Error State - TAILLE RÉDUITE -->
+        <LinearLayout
+            android:id="@+id/errorStateLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone"
+            android:padding="24dp">
+
+            <!-- Error illustration - PLUS PETIT -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginBottom="20dp"
+                app:cardBackgroundColor="@color/card_bg"
+                app:cardCornerRadius="45dp"
+                app:cardElevation="6dp">
+
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_error"
+                    android:contentDescription="@string/error_image_desc"
+                    app:tint="@color/error_red" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Erreur de connexion"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:fontFamily="@font/poppins_semibold"
+                android:layout_marginBottom="6dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Impossible de charger les abonnements.\nVérifiez votre connexion internet."
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins_medium"
+                android:textAlignment="center"
+                android:layout_marginBottom="20dp"
+                android:lineSpacingExtra="1dp" />
+
+            <!-- Retry Button - PLUS PETIT -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/retryButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Réessayer"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins_semibold"
+                app:cornerRadius="16dp"
+                app:backgroundTint="@color/accent_green"
+                app:icon="@drawable/ic_refresh"
+                app:iconGravity="start"
+                app:iconSize="16dp"
+                app:iconTint="@color/white"
+                app:rippleColor="@color/white_20"
+                android:minWidth="140dp"
+                android:minHeight="40dp"
+                android:contentDescription="@string/retry_button_desc" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- Success Indicator - COMPACT -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/successBanner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="12dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/success"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="3dp"
+        app:layout_constraintTop_toBottomOf="@id/headerSection">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_check_circle"
+                android:contentDescription="@string/success_icon_desc"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/successMessage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Plans chargés avec succès !"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins_medium" />
+
+            <ImageView
+                android:id="@+id/closeBanner"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_cancel"
+                android:padding="3dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/close_banner_desc"
+                app:tint="@color/white" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
